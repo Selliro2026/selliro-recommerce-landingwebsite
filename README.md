@@ -1,6 +1,6 @@
 # Selliro
 
-A responsive consumer marketing website for the Selliro recommerce app. Built with React, TypeScript, and Vite; all fonts and product imagery are served locally.
+A responsive consumer marketing website for the Selliro recommerce app. Built with React, TypeScript, Vite, and GSAP 3.15; all fonts and product imagery are served locally. The editorial design pairs product photography with large typography and a dedicated mobile composition. See [design direction and references](docs/design-direction.md).
 
 ## Development
 
@@ -27,7 +27,7 @@ npm run build
 npm test
 ```
 
-Playwright validates the production build: navigation, buying/selling steps, FAQ state, download and policy dialogs, keyboard focus, responsive overflow at 320/390/768/1024/1440px, axe WCAG A/AA checks, minimum mobile copy size, and motion preferences (13 checks total). The cloud machine has Chromium at `/usr/bin/chromium`; on another machine set `CHROMIUM_PATH` to your installed Chromium executable. Tests start and stop a production preview server automatically.
+Playwright validates the production build: navigation, buying/selling modes and individual steps, category rail controls, FAQ state, download and policy dialogs, keyboard focus, mobile menu resizing, the mobile download control, responsive overflow at 320/390/768/1024/1440px, axe WCAG A/AA checks, minimum mobile copy size, and live motion-preference changes (17 checks total). The cloud machine has Chromium at `/usr/bin/chromium`; on another machine set `CHROMIUM_PATH` to your installed Chromium executable. Tests start and stop a production preview server automatically, or reuse a running preview when not in CI.
 
 ## Add the official app details
 
@@ -42,10 +42,10 @@ Until supplied, these actions open accessible availability dialogs. No invented 
 ## Visual assets and product claims
 
 - The visual direction follows the supplied purple `#6045F4`, navy `#29235F`, and mint `#53E6D4` palette.
-- `PhonePreview` in `src/App.tsx` is an **illustrative app concept**, not a screenshot of the Flutter app. Replace it with approved app screenshots before public launch.
-- `public/images/product-editorial.png` is original AI-generated product imagery, arranged as a six-panel sprite with CSS positioning. It is illustrative, not an actual product listing or promise of stock. Replace or retain it after brand review.
+- `AppPreview` in `src/App.tsx` is an **illustrative app concept**, not a screenshot of the Flutter app. Replace it with approved app screenshots before public launch. The buying/selling demonstrations are also illustrative.
+- `public/images/selliro-editorial.webp` is original AI-generated campaign photography. `product-editorial.webp` is the optimized six-panel product sprite. These are illustrative, not actual listings or promises of stock. Both displayed images total approximately 242 KB. The original PNG remains for social metadata.
 - The typographic logo is an initial identity treatment, pending the official logo.
-- Locally served Manrope and DM Sans fonts come from Fontsource under their included font licenses. Lucide icons use the ISC license.
+- Locally served Manrope and DM Sans fonts come from Fontsource under their included font licenses. Functional arrows are simple custom SVGs; marketing sections do not use an icon pack. GSAP is used under its included standard license.
 - Features reflect the supplied product brief. Protection, verification, pickup, and rewards copy is qualified; no warranties, statistics, customer testimonials, prices, or return periods are fabricated. Verify feature availability against final policies before launch.
 - `public/social-card.svg` is an editable brand card; the social metadata uses the PNG product image for crawler compatibility.
 
@@ -54,11 +54,11 @@ Until supplied, these actions open accessible availability dialogs. No invented 
 - `src/App.tsx`: landing sections, reusable brand/store/phone components, and accessible interactions.
 - `src/styles.css`: layout, readable type sizes, responsive breakpoints, entrance sequences, and reduced-motion support.
 - `src/phone.css`: the decorative app mockup, scaled independently from marketing copy.
-- `src/usePageMotion.ts`: one-shot section reveals and restrained pointer depth with animation-frame scheduling and listener cleanup.
+- `src/usePageMotion.ts`: GSAP hero sequencing, one-shot section reveals, desktop-only photo/phone movement, and reading progress. `gsap.matchMedia()` reverts animations on breakpoint changes, motion-preference changes, and unmount.
 - `src/config.ts`: official destinations.
 - `tests/website.spec.ts`: browser regression and accessibility checks.
 
-The native dialog provides focus containment and Escape dismissal. Reveals respect reduced-motion preferences. The mobile navigation has explicit expanded state and dismisses after selection. All category calls to action lead to app download, keeping this a marketing site.
+Native dialogs provide modal semantics and Escape dismissal, with explicit Tab wrapping. The mobile menu also closes on navigation and desktop resizing. Reduced-motion users receive the complete static composition. The category rail uses native scrolling and scroll snap, with previous/next controls and keyboard access. All category calls to action lead to app download, keeping this a marketing site.
 
 ## Deploy from GitHub to Vercel
 
