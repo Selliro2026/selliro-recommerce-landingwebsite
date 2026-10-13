@@ -1,152 +1,35 @@
-/* Illustrative app artwork. Marketing content never depends on reading this miniature. */
+/* The supplied app home screen, displayed at its original proportions. */
 .app-device {
-  width: 278px;
-  height: 552px;
-  background: #242032;
-  border: 1px solid #aaa6b5;
-  padding: 8px;
-  border-radius: 42px;
-  box-shadow:
-    18px 28px 55px #23185850,
-    inset 0 0 0 2px #484254;
+  width: 348px;
+  height: 694px;
+  padding: 7px;
+  border: 1px solid #504a69;
+  border-radius: 43px;
+  background: #241f3b;
+  box-shadow: 0 20px 45px #29235f18;
   position: relative;
-}
-.app-device:after {
-  content: "";
-  position: absolute;
-  right: -3px;
-  top: 128px;
-  background: #3f394f;
-  width: 3px;
-  height: 51px;
-  border-radius: 2px;
 }
 .device-screen {
-  background: #fdfcf9;
-  height: 100%;
-  border-radius: 34px;
-  overflow: hidden;
-  padding: 0 17px;
   position: relative;
-  color: var(--navy);
+  height: 100%;
+  overflow: hidden;
+  border-radius: 35px;
+  background: #241d62;
 }
-.device-status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 39px;
-  padding: 0 9px;
-  font-size: 10px;
-  font-weight: 600;
-}
-.device-camera {
-  position: absolute;
-  width: 73px;
-  height: 21px;
-  border-radius: 20px;
-  background: #1c1922;
-  left: 50%;
-  top: 9px;
-  transform: translateX(-50%);
-}
-.device-brand {
-  font-family: "Manrope", sans-serif;
-  font-weight: 800;
-  font-size: 29px;
-  letter-spacing: -1.9px;
-  margin-top: 3px;
-}
-.device-brand > span {
-  color: var(--purple);
-}
-.device-title {
-  font-size: 23px;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  margin-top: 16px;
-  font-weight: 500;
-}
-.device-search {
-  margin-top: 16px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid #e4e0eb;
-  border-radius: 4px;
-  font-size: 9px;
-  color: #656074;
-}
-.device-search > span {
-  font-size: 20px;
-  line-height: 1;
-}
-.device-tabs {
-  display: flex;
-  gap: 17px;
-  margin: 17px 0 12px;
-  font-size: 8px;
-  color: #777080;
-}
-.device-tabs > span:first-child {
-  color: var(--purple);
-  border-bottom: 1px solid var(--purple);
-  padding-bottom: 5px;
-}
-.device-products {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 9px;
-}
-.device-products .product-photo {
-  height: 88px;
-  width: 100%;
-  aspect-ratio: auto;
-}
-.device-products span {
+.app-home-image {
   display: block;
-  font-size: 6px;
-  color: #787180;
-  margin-top: 6px;
+  width: 109.4%;
+  max-width: none;
+  height: auto;
+  margin-left: -4.7%;
 }
-.device-products strong {
-  display: block;
-  font-weight: 500;
-  font-size: 9px;
-  margin-top: 2px;
-}
-.device-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--paper);
+.device-bottom-crop {
   position: absolute;
-  bottom: 18px;
+  bottom: 0;
   left: 0;
   right: 0;
-  padding: 9px 19px;
-  border-top: 1px solid #e4e0eb;
-  font-size: 7px;
-}
-.device-bottom > span:first-child {
-  color: var(--purple);
-}
-.device-add {
-  display: grid;
-  place-items: center;
-  font-size: 19px;
-  background: var(--purple);
-  color: white;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-}
-.device-home {
-  position: absolute;
-  bottom: 7px;
-  left: 35%;
-  width: 30%;
-  height: 4px;
-  border-radius: 5px;
-  background: #2e273c;
+  height: 9%;
+  background: #fff url("/images/app-home.webp") center bottom / 109.4% auto
+    no-repeat;
+  border-top: 1px solid #efedf3;
 }

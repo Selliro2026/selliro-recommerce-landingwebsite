@@ -13,26 +13,26 @@ test("all page sections render with local assets and no runtime errors", async (
   await page.goto("/");
   await expect(page).toHaveTitle(/Selliro/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    /Great things\.\s*Better prices\./,
+    /Buy\.\s*Sell\.\s*Repeat\./,
   );
   for (const section of [
     "why-selliro",
     "how-it-works",
-    "discover",
     "trust",
     "faqs",
     "download",
   ]) {
     await expect(page.locator(`#${section}`)).toBeAttached();
   }
-  const image = await page.request.get("/images/product-editorial.webp");
+  const image = await page.request.get("/images/app-home.webp");
   expect(image.ok()).toBeTruthy();
   expect(image.headers()["content-type"]).toContain("image/webp");
   await expect(page.locator(".hero-stage")).toBeVisible();
-  await expect(page.locator(".hero-stage [data-renderer]")).toHaveAttribute(
-    "data-renderer",
-    /^(webgl|fallback)$/,
-  );
+  await expect(
+    page.locator(".hero-stage").getByRole("img", {
+      name: "Selliro app home screen with the redesigned Buy. Sell. Repeat. banner",
+    }),
+  ).toBeVisible();
   await page.waitForLoadState("networkidle");
   expect(errors).toEqual([]);
   expect(failed).toEqual([]);
@@ -168,10 +168,8 @@ for (const width of [320, 390, 1440]) {
           ".eyebrow",
           ".benefits h3",
           ".benefits p",
-          ".category h3",
-          ".category p",
-          ".discovery-controls p",
-          ".discovery-footer > span",
+          ".why-story > p",
+          ".app-promises > span",
           ".mode-switch button",
           ".step h3 button",
           ".step p",
@@ -179,9 +177,8 @@ for (const width of [320, 390, 1440]) {
           ".journey-label",
           ".journey-card-link",
           ".journey-bottomline > span",
-          ".trust-intro > p",
-          ".trust-features h3",
-          ".trust-features article p",
+          ".assurance-copy h3",
+          ".assurance-copy p",
           ".trust-note",
           ".rewards-copy p",
           ".faq-intro p",
@@ -227,126 +224,142 @@ test("motion respects preferences, including changes after page load", async ({
     .first()
     .evaluate((node) => getComputedStyle(node).animationName);
   expect(headlineMotion).toBe("none");
-  const scene = page.locator(".hero-stage [data-renderer]");
-  await expect(scene).toHaveAttribute("data-motion", "reduced");
+  const headline = page.locator(".hero-line > span").first();
+  await expect(headline).toHaveCSS("transform", "none");
+  await expect(page.locator(".hero-stage")).toHaveCSS("opacity", "1");
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await expect(scene).toHaveAttribute("data-motion", "enabled");
+  await expect
+    .poll(() => headline.evaluate((node) => getComputedStyle(node).transform))
+    .not.toBe("none");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(scene).toHaveAttribute("data-motion", "reduced");
-  await expect(page.locator(".hero-line > span").first()).toHaveCSS(
-    "transform",
-    "none",
-  );
+  await expect(headline).toHaveCSS("transform", "none");
+  await expect(page.locator(".hero-stage")).toHaveCSS("opacity", "1");
 });
 
-test("3D products render, rotate with accessible controls, and reset", async ({
+test("the supplied app screen loads without distortion and fits phone layouts", async ({
   page,
 }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const scene = page.locator(".product-scene");
-  const stage = scene.locator(".product-scene__stage");
-  const canvas = scene.locator("canvas");
-  await expect(scene).toHaveAttribute("data-renderer", "webgl");
-  await expect(canvas).toBeVisible();
-  expect(
-    await canvas.evaluate(
-      (node: HTMLCanvasElement) => node.width > 0 && node.height > 0,
-    ),
-  ).toBeTruthy();
-  await expect(stage).toHaveAttribute("data-rotation", "-0.035");
-  const original = await canvas.screenshot();
-
-  await scene.getByRole("button", { name: "Rotate products right" }).click();
-  await expect
-    .poll(async () => Number(await stage.getAttribute("data-rotation")))
-    .toBeGreaterThan(0.15);
-  const rotated = await canvas.screenshot();
-  expect(Buffer.compare(original, rotated)).not.toBe(0);
-
-  await scene.getByRole("button", { name: "Reset view" }).click();
-  await expect(stage).toHaveAttribute("data-rotation", "-0.035");
-  const left = scene.getByRole("button", { name: "Rotate products left" });
-  await left.focus();
-  await page.keyboard.press("Enter");
-  await expect
-    .poll(async () => Number(await stage.getAttribute("data-rotation")))
-    .toBeLessThan(-0.2);
-  await scene.getByRole("button", { name: "Reset view" }).click();
-  await expect(stage).toHaveAttribute("data-rotation", "-0.035");
-  expect(errors).toEqual([]);
-});
-
-test("unsupported WebGL retains product artwork and working download controls", async ({
-  page,
-}) => {
-  const errors: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  await page.addInitScript(() => {
-    const original = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function (
-      contextId: string,
-      ...args: unknown[]
-    ) {
-      if (/^(webgl2?|experimental-webgl)$/.test(contextId)) {
-        document.documentElement.dataset.testWebglBlocked = "true";
-        return null;
-      }
-      return Reflect.apply(original, this, [contextId, ...args]);
-    } as typeof original;
-  });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute(
-    "data-test-webgl-blocked",
-    "true",
-  );
-  const scene = page.locator(".product-scene");
-  await expect(scene).toHaveAttribute("data-renderer", "fallback");
-  await expect(scene.locator(".product-scene__fallback")).toBeVisible();
-  await expect(scene.locator(".product-scene__fallback-phone")).toBeVisible();
-  await expect(
-    scene.locator(".product-scene__fallback-headphones"),
-  ).toBeVisible();
-  await expect(scene.locator("canvas")).toHaveCount(0);
-  await expect(
-    scene.getByRole("button", { name: "Rotate products right" }),
-  ).toHaveCount(0);
-  await page
-    .getByRole("button", { name: "Download on the App Store" })
-    .first()
-    .click();
-  await expect(page.getByRole("dialog")).toBeVisible();
-  await page.keyboard.press("Escape");
-  expect(errors).toEqual([]);
-});
-
-test("category controls browse the collection on a phone", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const rail = page.getByRole("region", { name: "Pre-owned categories" });
-  const next = page.getByRole("button", { name: "Next categories" });
-  const previous = page.getByRole("button", { name: "Previous categories" });
-  await expect(previous).toBeDisabled();
-  await next.click();
-  await expect
-    .poll(() => rail.evaluate((node) => node.scrollLeft))
-    .toBeGreaterThan(200);
-  await expect(previous).toBeEnabled();
-  const remainingCards = (await rail.getByRole("link").count()) - 2;
-  for (let index = 0; index < remainingCards; index++) {
-    const before = await rail.evaluate((node) => node.scrollLeft);
-    await next.click();
+  for (const width of [320, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const phone = page.locator(".hero-stage .app-device");
+    const screen = phone.getByRole("img", {
+      name: "Selliro app home screen with the redesigned Buy. Sell. Repeat. banner",
+    });
+    await expect(phone).toBeVisible();
+    await expect(screen).toBeVisible();
+    await expect(screen).toHaveAttribute("src", "/images/app-home.webp");
     await expect
-      .poll(() => rail.evaluate((node) => node.scrollLeft))
-      .toBeGreaterThan(before);
+      .poll(() =>
+        screen.evaluate(
+          (node: HTMLImageElement) =>
+            node.complete && node.naturalWidth > 0 && node.naturalHeight > 0,
+        ),
+      )
+      .toBeTruthy();
+    const dimensions = await screen.evaluate((node: HTMLImageElement) => {
+      const image = node.getBoundingClientRect();
+      const phone = node.closest(".app-device")!.getBoundingClientRect();
+      const screen = node.closest(".device-screen")!;
+      const viewport = screen.getBoundingClientRect();
+      const clipping = getComputedStyle(screen);
+      return {
+        naturalRatio: node.naturalWidth / node.naturalHeight,
+        displayedRatio: image.width / image.height,
+        imageWidth: image.width,
+        imageLeft: image.left,
+        imageRight: image.right,
+        screenLeft: viewport.left,
+        screenRight: viewport.right,
+        screenTop: viewport.top,
+        screenBottom: viewport.bottom,
+        overflowX: clipping.overflowX,
+        overflowY: clipping.overflowY,
+        phoneLeft: phone.left,
+        phoneRight: phone.right,
+        phoneTop: phone.top,
+        phoneBottom: phone.bottom,
+        viewportWidth: window.innerWidth,
+      };
+    });
+    expect(dimensions.naturalRatio).toBeLessThan(0.6);
+    expect(dimensions.imageWidth).toBeGreaterThan(200);
+    expect(dimensions.phoneLeft).toBeGreaterThanOrEqual(0);
+    expect(dimensions.phoneRight).toBeLessThanOrEqual(dimensions.viewportWidth);
+    expect(dimensions.screenLeft).toBeGreaterThanOrEqual(dimensions.phoneLeft);
+    expect(dimensions.screenRight).toBeLessThanOrEqual(dimensions.phoneRight);
+    expect(dimensions.screenTop).toBeGreaterThanOrEqual(dimensions.phoneTop);
+    expect(dimensions.screenBottom).toBeLessThanOrEqual(dimensions.phoneBottom);
+    expect(dimensions.overflowX).toBe("hidden");
+    expect(dimensions.overflowY).toBe("hidden");
+    // The image extends behind the clipped viewport to mask source-image gutters.
+    expect(dimensions.imageLeft).toBeLessThanOrEqual(dimensions.screenLeft);
+    expect(dimensions.imageRight).toBeGreaterThanOrEqual(
+      dimensions.screenRight,
+    );
+    expect(
+      Math.abs(dimensions.displayedRatio - dimensions.naturalRatio),
+    ).toBeLessThan(0.01);
+    await expect(page.locator("canvas")).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: /Rotate products|Reset view/ }),
+    ).toHaveCount(0);
   }
-  await expect(next).toBeDisabled();
-  await rail.getByRole("link", { name: /Lifestyle/ }).click();
-  await expect(page).toHaveURL(/#download$/);
+});
+
+test("delivery and the 3-day return window are explained with accessible details", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const trust = page.locator("#trust");
+  await trust.scrollIntoViewIfNeeded();
+  await expect(trust).toContainText(/secure delivery/i);
+  await expect(trust).toContainText(/3.day return window/i);
+  const deliveryQuestion = page.getByRole("button", {
+    name: "How does secure delivery work?",
+  });
+  await deliveryQuestion.click();
+  await expect(deliveryQuestion).toHaveAttribute("aria-expanded", "true");
+  const deliveryAnswerId = await deliveryQuestion.getAttribute("aria-controls");
+  expect(deliveryAnswerId).toBeTruthy();
+  const deliveryAnswer = page.locator(`#${deliveryAnswerId}`);
+  await expect(deliveryAnswer).toBeVisible();
+  await expect(deliveryAnswer).toContainText(/delivery/i);
+  await expect(deliveryAnswer).toContainText(/location|availability/i);
+  const question = page.getByRole("button", {
+    name: "How does the 3-day return window work?",
+  });
+  await question.click();
+  await expect(question).toHaveAttribute("aria-expanded", "true");
+  await expect(deliveryQuestion).toHaveAttribute("aria-expanded", "false");
+  await expect(deliveryAnswer).not.toBeVisible();
+  const answerId = await question.getAttribute("aria-controls");
+  expect(answerId).toBeTruthy();
+  const answer = page.locator(`#${answerId}`);
+  await expect(answer).toBeVisible();
+  await expect(answer).toContainText(/3.day/i);
+  await expect(answer).toContainText(/eligib|terms|policy/i);
+  await question.click();
+  await expect(question).toHaveAttribute("aria-expanded", "false");
+  await expect(answer).not.toBeVisible();
+});
+
+test("app navigation and the hero explain how to use Selliro", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "The app", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#why-selliro$/);
+  await page.locator(".hero-explore").click();
+  await expect(page).toHaveURL(/#how-it-works$/);
+  await expect(page.getByRole("button", { name: "I’m buying" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "I’m selling" })).toBeVisible();
 });
 
 test("each journey step updates its explanation and product story", async ({
@@ -397,7 +410,7 @@ test("mobile download control appears after the hero and clears at the final CTA
   await page.goto("/");
   const dock = page.locator(".mobile-dock");
   await expect(dock).not.toBeVisible();
-  await page.locator("#discover").scrollIntoViewIfNeeded();
+  await page.locator("#how-it-works").scrollIntoViewIfNeeded();
   await expect(dock).toBeVisible();
   await dock.getByRole("button", { name: "Get Selliro" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();

@@ -1,26 +1,8 @@
-import {
-  useEffect,
-  lazy,
-  Suspense,
-  useRef,
-  useState,
-  type CSSProperties,
-  type KeyboardEvent,
-} from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { siteConfig } from "./config";
 import { usePageMotion } from "./usePageMotion";
-const ProductScene = lazy(() => import("./components/ProductScene"));
-
-type Product = "headphones" | "phone" | "laptop" | "chair" | "shoes" | "camera";
 type ModalKind = "download" | "contact" | "privacy" | "terms" | "returns";
-const products: Record<Product, { x: string; y: string; label: string }> = {
-  headphones: { x: "0%", y: "0%", label: "Silver over-ear headphones" },
-  phone: { x: "50%", y: "0%", label: "Lavender smartphone" },
-  laptop: { x: "100%", y: "0%", label: "Silver laptop" },
-  chair: { x: "0%", y: "100%", label: "Leather and oak lounge chair" },
-  shoes: { x: "50%", y: "100%", label: "White and green everyday sneakers" },
-  camera: { x: "100%", y: "100%", label: "Silver mirrorless camera" },
-};
+
 function Arrow({
   direction = "up-right",
 }: {
@@ -35,23 +17,6 @@ function Arrow({
     >
       <path d="M5 19 19 5M5 5h14v14" stroke="currentColor" strokeWidth="1.7" />
     </svg>
-  );
-}
-function ProductPhoto({
-  product,
-  className = "",
-}: {
-  product: Product;
-  className?: string;
-}) {
-  const item = products[product];
-  return (
-    <div
-      role="img"
-      aria-label={item.label}
-      className={`product-photo ${className}`}
-      style={{ "--photo-x": item.x, "--photo-y": item.y } as CSSProperties}
-    />
   );
 }
 function keepDialogFocus(event: KeyboardEvent<HTMLDialogElement>) {
@@ -143,38 +108,6 @@ function StoreButtons({ open }: { open: () => void }) {
     </div>
   );
 }
-const categories = [
-  {
-    product: "phone",
-    title: "Smartphones",
-    description: "Your next upgrade.",
-    number: "01",
-  },
-  {
-    product: "chair",
-    title: "Furniture",
-    description: "Make it feel like home.",
-    number: "02",
-  },
-  {
-    product: "headphones",
-    title: "Electronics",
-    description: "Good sound. Good company.",
-    number: "03",
-  },
-  {
-    product: "laptop",
-    title: "Laptops",
-    description: "Room for your next big idea.",
-    number: "04",
-  },
-  {
-    product: "shoes",
-    title: "Lifestyle",
-    description: "Find your everyday favourites.",
-    number: "05",
-  },
-] as const;
 const buyingSteps = [
   [
     "Discover your next favourite.",
@@ -217,81 +150,62 @@ const faqItems = [
     "Found something you like? Send the seller an offer through the app. You can agree on a price together before taking the next step.",
   ],
   [
-    "Is doorstep pickup available everywhere?",
-    "Doorstep pickup and product verification are available for supported locations and products. Check the options shown in the app for your transaction.",
+    "How does secure delivery work?",
+    "Delivery connects your purchase from seller to buyer through Selliro. Pickup and delivery availability depend on the product and location. Check the options and next steps shown in the app for your transaction.",
   ],
   [
-    "How does buyer protection work?",
-    "Buyer protection is subject to eligibility and the terms for your transaction. Review the product details and applicable policies in the app before buying.",
+    "How does the 3-day return window work?",
+    "Selliro offers a 3-day return window to check your purchase and request a return. Eligibility and return terms apply; review the policy and the details for your transaction in the app.",
   ],
   [
     "What are Selliro Coins?",
     "Selliro Coins are part of the app’s rewards experience. Check the rewards section in the app for available ways to earn, use, and redeem them.",
   ],
 ];
-function AppPreview() {
+function AppPreview({ eager = false }: { eager?: boolean }) {
   return (
-    <div
-      className="app-device"
-      role="img"
-      aria-label="Illustrative Selliro app preview"
-    >
-      <div className="device-screen" aria-hidden="true">
-        <div className="device-status">
-          <span>9:41</span>
-          <span className="device-camera" />
-          <span>▰</span>
-        </div>
-        <div className="device-brand">
-          selliro<span>.</span>
-        </div>
-        <div className="device-title">
-          What will you
-          <br />
-          find today?
-        </div>
-        <div className="device-search">
-          <span>⌕</span> Search Selliro
-        </div>
-        <div className="device-tabs">
-          <span>For you</span>
-          <span>Tech</span>
-          <span>Home</span>
-        </div>
-        <div className="device-products">
-          {(["headphones", "chair", "phone", "camera"] as const).map(
-            (product, index) => (
-              <div key={product}>
-                <ProductPhoto product={product} />
-                <span>
-                  {
-                    [
-                      "Sound you’ll love",
-                      "A new favourite seat",
-                      "Your next upgrade",
-                      "A different perspective",
-                    ][index]
-                  }
-                </span>
-                <strong>
-                  {
-                    ["Electronics", "Furniture", "Smartphones", "Cameras"][
-                      index
-                    ]
-                  }
-                </strong>
-              </div>
-            ),
-          )}
-        </div>
-        <div className="device-bottom">
-          <span>Explore</span>
-          <span>Saved</span>
-          <span className="device-add">+</span>
-          <span>Inbox</span>
-        </div>
-        <div className="device-home" />
+    <div className="app-device">
+      <div className="device-screen">
+        <img
+          className="app-home-image"
+          src="/images/app-home.webp"
+          alt="Selliro app home screen with the redesigned Buy. Sell. Repeat. banner"
+          width="724"
+          height="2171"
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
+        />
+        <div className="device-bottom-crop" aria-hidden="true" />
       </div>
+    </div>
+  );
+}
+function RecommercePhoto({
+  scene,
+  className = "",
+}: {
+  scene: "seller" | "delivery" | "buyer";
+  className?: string;
+}) {
+  return (
+    <div className={`recommerce-photo photo-${scene} ${className}`}>
+      <img
+        src={
+          scene === "buyer"
+            ? "/images/check-your-find.webp"
+            : "/images/recommerce-stories.webp"
+        }
+        alt={
+          scene === "seller"
+            ? "A seller carefully packing a pre-owned camera for its next owner"
+            : scene === "delivery"
+              ? "A buyer receiving a securely packed parcel at her doorstep"
+              : "A buyer checking her pre-owned camera after delivery"
+        }
+        width={scene === "buyer" ? 1448 : 2135}
+        height={scene === "buyer" ? 1086 : 736}
+        loading="lazy"
+      />
     </div>
   );
 }
@@ -301,11 +215,9 @@ export default function App() {
   const [step, setStep] = useState(0);
   const [modal, setModal] = useState<ModalKind>("download");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [railPosition, setRailPosition] = useState({ start: true, end: false });
   const [showDock, setShowDock] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const menuRef = useRef<HTMLDialogElement>(null);
-  const railRef = useRef<HTMLDivElement>(null);
   const pageRef = usePageMotion();
   const showModal = (kind: ModalKind) => {
     setModal(kind);
@@ -350,36 +262,6 @@ export default function App() {
       window.removeEventListener("resize", update);
     };
   }, []);
-  useEffect(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const update = () =>
-      setRailPosition({
-        start: rail.scrollLeft < 8,
-        end: rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 8,
-      });
-    const observer = new ResizeObserver(update);
-    observer.observe(rail);
-    rail.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => {
-      observer.disconnect();
-      rail.removeEventListener("scroll", update);
-    };
-  }, []);
-  const scrollRail = (direction: number) => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const card = rail.querySelector<HTMLElement>(".category");
-    const distance =
-      (card?.offsetWidth ?? 300) + parseFloat(getComputedStyle(rail).columnGap);
-    rail.scrollBy({
-      left: direction * distance,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
-    });
-  };
   const policyLink = (kind: "privacy" | "terms" | "returns", label: string) => {
     const url = siteConfig[`${kind}Url`];
     return url ? (
@@ -401,9 +283,9 @@ export default function App() {
         <div className="nav-wrap container">
           <Brand />
           <nav className="desktop-nav" aria-label="Main navigation">
-            <a href="#discover">Explore</a>
+            <a href="#why-selliro">The app</a>
             <a href="#how-it-works">How it works</a>
-            <a href="#why-selliro">Why Selliro</a>
+            <a href="#trust">Delivery & returns</a>
           </nav>
           <div className="nav-actions">
             <a className="button button-purple nav-download" href="#download">
@@ -453,9 +335,9 @@ export default function App() {
           aria-label="Mobile navigation"
         >
           {[
-            ["discover", "Explore"],
+            ["why-selliro", "The app"],
             ["how-it-works", "How it works"],
-            ["why-selliro", "Why Selliro"],
+            ["trust", "Delivery & returns"],
             ["faqs", "FAQs"],
           ].map(([id, label], i) => (
             <a key={id} href={`#${id}`} onClick={closeMenu}>
@@ -480,38 +362,36 @@ export default function App() {
             <div className="hero-copy">
               <h1 id="hero-title">
                 <span className="hero-line">
-                  <span>Great things.</span>
+                  <span>Buy. Sell.</span>
                 </span>{" "}
                 <span className="hero-line">
-                  <span>Better prices.</span>
+                  <span>Repeat.</span>
                 </span>
               </h1>
               <p>
-                Buy and sell pre-owned.
+                Buy pre-owned. Sell with ease.
                 <br />
-                Find more of what you love.
+                All in the Selliro app.
               </p>
               <StoreButtons open={() => showModal("download")} />
-              <a className="hero-explore text-link" href="#discover">
-                Explore the good finds <Arrow direction="down" />
+              <a className="hero-explore text-link" href="#how-it-works">
+                See how it works <Arrow direction="down" />
               </a>
             </div>
             <div className="hero-stage">
-              <Suspense
-                fallback={
-                  <div
-                    className="scene-loading"
-                    role="img"
-                    aria-label="Silver headphones and a smartphone"
-                  >
-                    <ProductPhoto product="headphones" />
-                    <ProductPhoto product="phone" />
-                  </div>
-                }
-              >
-                <ProductScene />
-              </Suspense>
+              <div className="app-stage-backdrop" aria-hidden="true" />
+              <div className="hero-phone">
+                <AppPreview eager />
+              </div>
             </div>
+          </div>
+          <div
+            className="app-promises container"
+            aria-label="Selliro app benefits"
+          >
+            <span>Buy & sell in one app</span>
+            <span>Secure delivery</span>
+            <span>3-day return window</span>
           </div>
         </section>
         <section
@@ -519,41 +399,35 @@ export default function App() {
           id="why-selliro"
         >
           <div className="section-marker reveal">
-            <span>Why Selliro</span>
+            <span>Meet the Selliro app</span>
           </div>
           <div className="why-heading">
             <div className="why-story reveal">
               <h2>
-                Great taste.
-                <br />A smaller price tag.
+                Your next find.
+                <br />
+                Someone’s fresh start.
               </h2>
               <p>
-                That phone you’ve had your eye on. The chair that makes the
-                room. Find things you’ll love, with plenty of life left in them.
+                A phone you’ve had your eye on. A camera ready for its next
+                adventure. Selliro brings buyers and sellers together to give
+                pre-owned things a new beginning.
               </p>
             </div>
-            <div className="life-photo">
-              <img
-                src="/images/selliro-editorial.webp"
-                alt="A leather lounge chair and headphones in a sunlit home"
-                width="1122"
-                height="1402"
-                loading="lazy"
-              />
-            </div>
+            <RecommercePhoto scene="seller" className="life-photo" />
           </div>
           <div className="benefits">
             {[
               [
-                "Find more for your money.",
-                "Shop pre-owned and make room in your budget for the things that matter.",
+                "Find your kind of pre-owned.",
+                "Browse the app for everyday essentials and unexpected favourites. Good things, ready for a second chapter.",
               ],
               [
-                "Sell what’s sitting still.",
-                "Your unused things could be exactly what someone else is looking for.",
+                "Make space. Make a sale.",
+                "A few photos, the details, your price. Turn the things you no longer use into someone’s next great find.",
               ],
               [
-                "Make a deal together.",
+                "Make the offer yours.",
                 "Send an offer, talk to the seller, and agree on a price you’re both happy with.",
               ],
             ].map(([title, copy]) => (
@@ -566,70 +440,6 @@ export default function App() {
             ))}
           </div>
         </section>
-        <section className="discovery-section" id="discover">
-          <div className="container section-space">
-            <div className="section-marker reveal">
-              <span>Explore the collection</span>
-            </div>
-            <div className="discovery-heading reveal">
-              <h2>
-                A little discovery.
-                <br />
-                <span>A lot to love.</span>
-              </h2>
-              <div className="discovery-controls">
-                <div className="rail-buttons">
-                  <button
-                    className="icon-button"
-                    aria-label="Previous categories"
-                    aria-controls="category-rail"
-                    disabled={railPosition.start}
-                    onClick={() => scrollRail(-1)}
-                  >
-                    <Arrow direction="left" />
-                  </button>
-                  <button
-                    className="icon-button"
-                    aria-label="Next categories"
-                    aria-controls="category-rail"
-                    disabled={railPosition.end}
-                    onClick={() => scrollRail(1)}
-                  >
-                    <Arrow direction="right" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              className="category-rail"
-              id="category-rail"
-              ref={railRef}
-              role="region"
-              aria-label="Pre-owned categories"
-              tabIndex={0}
-            >
-              {categories.map((item) => (
-                <a className="category" href="#download" key={item.title}>
-                  <div className="category-image">
-                    <ProductPhoto product={item.product} />
-                    <span className="category-action">
-                      <Arrow />
-                    </span>
-                  </div>
-                  <div className="category-caption">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-            <div className="discovery-footer">
-              <a href="#download" className="text-link">
-                Explore Selliro <Arrow />
-              </a>
-            </div>
-          </div>
-        </section>
         <section
           className="how-section container section-space"
           id="how-it-works"
@@ -640,9 +450,9 @@ export default function App() {
           <div className="how-layout">
             <div className="how-intro reveal">
               <h2>
-                Meet your next
+                One app.
                 <br />
-                <span className="purple-text">great deal.</span>
+                <span className="purple-text">Both sides of the deal.</span>
               </h2>
               <div
                 className="mode-switch"
@@ -671,11 +481,10 @@ export default function App() {
             </div>
             <div className={`journey-visual journey-${mode} reveal`}>
               <div className="journey-scene" key={`${mode}-${step}`}>
-                <div className="journey-product">
-                  <ProductPhoto
-                    product={mode === "buy" ? "headphones" : "camera"}
-                  />
-                </div>
+                <RecommercePhoto
+                  scene={mode === "buy" ? "buyer" : "seller"}
+                  className="journey-photo"
+                />
                 <div className="journey-card">
                   <div className="journey-card-top">
                     <span>
@@ -695,7 +504,7 @@ export default function App() {
                   <strong>
                     {mode === "buy"
                       ? [
-                          "Great sound. Even better value.",
+                          "A great find. Even better value.",
                           "Your find. Your offer.",
                           "From their shelf to yours.",
                         ][step]
@@ -768,61 +577,72 @@ export default function App() {
           </div>
         </section>
         <section className="trust-section" id="trust">
-          <div className="container trust-layout section-space">
-            <div className="trust-intro reveal">
-              <span className="eyebrow">Built around trust</span>
+          <div className="container section-space">
+            <div className="trust-heading reveal">
+              <span className="eyebrow">From a good deal to your doorstep</span>
               <h2>
-                A good deal
+                A little more
                 <br />
-                should <span>feel good.</span>
+                <span>peace of mind.</span>
               </h2>
-              <p>
-                Know who you’re buying from, what you’re buying, and what comes
-                next.
-              </p>
-              <a href="#faqs" className="text-link">
-                Your questions, answered <Arrow />
-              </a>
             </div>
-            <div className="trust-features">
-              {[
-                [
-                  "01",
-                  "Know your seller.",
-                  "Seller ratings and verification help you get to know the person behind the product.",
-                ],
-                [
-                  "02",
-                  "Know your purchase.",
-                  "Review the details and explore buyer protection and product checks for eligible purchases.",
-                ],
-                [
-                  "03",
-                  "Plan the handover.",
-                  "Supported doorstep pickup makes it easier to send your things on their way.",
-                ],
-              ].map(([number, title, copy]) => (
-                <article className="reveal" key={number}>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{copy}</p>
-                  </div>
-                </article>
-              ))}
-              <p className="trust-note">
-                Protection, verification, and pickup depend on your location,
-                product, and transaction. Check availability and terms in the
-                app.
-              </p>
+            <div className="assurance-grid">
+              <article className="delivery-story reveal">
+                <RecommercePhoto scene="delivery" />
+                <div className="assurance-copy">
+                  <h3>Secure delivery.</h3>
+                  <p>
+                    From the seller’s hands to yours. Arrange delivery through
+                    Selliro and follow the next steps in the app.
+                  </p>
+                  <a
+                    href="#faqs"
+                    className="text-link"
+                    onClick={() => setOpenFaq(3)}
+                  >
+                    Delivery, explained <Arrow />
+                  </a>
+                </div>
+              </article>
+              <article className="return-story reveal">
+                <div className="return-window" aria-hidden="true">
+                  <span>3</span>
+                  <span>
+                    days to
+                    <br />
+                    check your find.
+                  </span>
+                </div>
+                <div className="assurance-copy">
+                  <h3>A 3-day return window.</h3>
+                  <p>
+                    Take a closer look at your pre-owned find. You have a 3-day
+                    window to request a return, subject to eligibility and
+                    return terms.
+                  </p>
+                  <a
+                    href="#faqs"
+                    className="text-link"
+                    onClick={() => setOpenFaq(4)}
+                  >
+                    How returns work <Arrow />
+                  </a>
+                </div>
+              </article>
             </div>
+            <p className="trust-note">
+              Delivery availability and return eligibility depend on the
+              product, location, and transaction. Check the terms in the app
+              before buying.
+            </p>
           </div>
         </section>
         <section className="rewards-section container reveal">
           <div className="rewards-copy">
             <h2>Good finds. With rewards.</h2>
             <p>
-              Meet Selliro Coins. Explore ways to earn and use rewards in the
-              app.
+              Buy. Sell. Discover Selliro Coins. Explore ways to earn and use
+              rewards, right in the app.
             </p>
           </div>
           <a className="text-link" href="#download">
@@ -873,14 +693,14 @@ export default function App() {
           <div className="container download-layout">
             <div className="download-copy reveal">
               <h2>
-                It’s out there.
+                Your next chapter.
                 <br />
-                <span>Find it on Selliro.</span>
+                <span>Starts on Selliro.</span>
               </h2>
               <p>
-                Your next great find. Someone’s next favourite.
-                <br className="desktop-break" /> Buy and sell pre-owned, all in
-                one app.
+                Great finds. More space. New possibilities.
+                <br className="desktop-break" /> Download the app and get
+                started.
               </p>
               <StoreButtons open={() => showModal("download")} />
             </div>

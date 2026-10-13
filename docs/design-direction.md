@@ -1,27 +1,34 @@
-# Selliro product-led redesign
+# Selliro mobile app marketing direction
 
-This revision responds to the request for larger readable type, a cleaner hero, richer motion, and real 3D. The opening gives the message, store actions, and interactive products space; each following section uses its own composition within the original brand palette.
+The website introduces the Selliro mobile app and encourages downloads. This revision centers the supplied app home screen, clearer buying and selling stories, secure delivery, and the requested 3-day return window. The visual direction combines a front-facing phone, large readable type, human editorial photography, and restrained 2D motion.
 
-## Reference research
+## Visual and technical references
 
-Reviewed on 13 October 2026:
+- The user's supplied Selliro app home screenshot is the primary product reference. Its navigation, categories, and listings communicate the actual app interface; a revised photographic “Buy. Sell. Repeat.” banner replaces the earlier rendered illustration.
+- [GSAP responsive animation guidance](<https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/>) and [official GSAP package documentation](https://github.com/greensock/GSAP) inform media-query scoping, animation cleanup, ScrollTrigger, and reduced-motion conditions. The installed version is 3.15.0.
+- [Codrops on-scroll typography reference](https://github.com/codrops/OnScrollTypographyAnimations) informed the short headline entrances. The implementation preserves native scrolling.
 
-- [Awwwards ecommerce collection](https://www.awwwards.com/websites/e-commerce/): retail presentation, product discovery, and customer journeys. Used as a direction reference, not a template or an assertion that Selliro has received an award.
-- [Nothing](https://nothing.tech/): a consumer-product-first content structure, direct product/category labels, and clear purchase actions. Selliro retains its own palette and identity.
-- [GSAP responsive animation guidance](<https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/>) and [official GSAP package documentation](https://github.com/greensock/GSAP): media-query scoping, automatic animation cleanup, ScrollTrigger, and reduced-motion conditions. The installed version is 3.15.0.
-- [Codrops on-scroll typography reference](https://github.com/codrops/OnScrollTypographyAnimations): text choreography as an accent. The implementation uses short line entrances and preserves native scrolling.
+Earlier research included Awwwards and consumer ecommerce sites. The current page structure follows the clarified mobile app marketing brief. Selliro does not claim an award or a third-party endorsement.
 
 ## Implementation decisions
 
-- Preserve purple `#6045F4`, navy `#29235F`, and mint `#53E6D4`. Warm white and pale tints support those brand colors.
-- Remove decorative feature icons, numbered labels, and redundant microcopy. Use product imagery, editorial rows, and simple functional arrows. Marketing text has a 16px minimum; core body copy is generally 18–26px.
-- Set a direct headline: “Great things. Better prices.” Explain buying and selling in the opening paragraph, with both store actions immediately underneath.
-- Build a pale-lavender 3D hero, a large photographic benefits section, a navy collection chapter, an interactive buying/selling story, and a mint trust chapter. The 3D phone and headphones use local geometry, bevels, studio reflections, a canvas screen texture, and soft grounding shadows.
-- Recompose the mobile page: left-aligned headline, readable copy, large store buttons, a dedicated portrait product stage, native category swipe, instructions before the product demonstration, and a download action that clears when the final download section is visible.
-- Use GSAP for staged headline entrances, section reveals, a photograph mask transition, reading progress, and desktop scroll movement. Keep native scrolling. Changing reduced-motion preferences restores a static page immediately.
-- Let visitors drag the 3D products or use keyboard-accessible rotation and reset buttons. Preserve vertical touch scrolling. The scene renders on demand after a finite entrance, caps pixel density, pauses off-screen, and provides a static-art fallback without WebGL2. Three.js is loaded dynamically.
-- Encode local imagery as WebP without altering its composition. The campaign photograph and product sprite together are approximately 242 KB. No third-party image, font, or animation CDN is required at runtime.
+- Preserve purple `#6045F4`, navy `#29235F`, and mint `#53E6D4`. Warm white and pale tints support the original brand colors.
+- Lead with “Buy. Sell. Repeat.”, a direct explanation of the app, both store actions, and a large phone displaying the supplied screen. The phone is front-facing, with no perspective rotation or 3D rendering.
+- Use `public/images/app-home.webp` for the phone in the hero and final download section. Image generation revised the banner to a photographic recommerce composition. Keep the screen's proportions intact and use deliberate framing on small displays.
+- Replace the storefront-style category chapter with app benefits, an interactive buying/selling walkthrough, delivery and returns, rewards, FAQs, and download actions. Visitors discover the service on the website and complete transactions in the app.
+- Show a seller packing a pre-owned camera and a buyer receiving a parcel with `public/images/recommerce-stories.webp`. Show a buyer checking her delivered camera with `public/images/check-your-find.webp`. Both are original generated editorial photographs with natural materials, human detail, and subtle navy/mint clothing.
+- Make secure delivery and the 3-day return window easy to find in the opening benefits, a dedicated section, and explanatory FAQs. Qualify availability and eligibility without inventing policy conditions or refund promises. Approved policy destinations remain configurable.
+- Maintain a 16px minimum for website marketing text, with larger core paragraphs, headings, and actions. Tiny interface text within the supplied screenshot belongs to the reference image and is not used for website instructions.
+- Recompose mobile layouts around the headline, download actions, clearly framed app screen, full-width photographs, and readable buying/selling steps. The mobile download control appears after the hero and clears at the final download section.
+- Use GSAP for staged headline entrances, section reveals, a photograph mask transition, reading progress, and limited desktop 2D movement. Native scrolling remains intact. Changing reduced-motion preferences restores a static page immediately.
+- Serve optimized WebP images and fonts locally. Three.js and the previous WebGL product scene have been removed; there is no 3D artwork on the page.
 
-The generated photography, app concept, and demonstration panels are illustrative. Store links, official app screenshots, contact details, and approved policies remain pending as requested; the site does not invent stock, prices, guarantees, customer quotes, or awards.
+## Asset provenance and content boundaries
 
-Validation covers five layout widths (320–1440px), meaningful browser interactions, keyboard focus, axe accessibility, readable marketing copy, motion preferences, actual WebGL image changes during rotation, and the artwork fallback. The app concepts and 3D display do not represent approved Flutter assets.
+The app screen is based on the user-supplied screenshot with an edited banner. Its visible products, prices, and controls are reference content, not live website inventory. The editorial photographs are generated campaign imagery, not evidence of actual customers or transactions. The walkthroughs explain the app experience rather than simulating a live order.
+
+Store URLs, support details, and approved policies remain pending as requested. The website uses accessible availability dialogs until those destinations are supplied. The delivery and 3-day return messaging comes from the user's brief; final eligibility and transaction terms belong in the approved app policies. No testimonials, business statistics, awards, or additional guarantees have been invented.
+
+## Validation scope
+
+The 21-check browser suite covers five layout widths (320–1440px), navigation and buying/selling interactions, screenshot proportions and phone framing, delivery and return explanations, keyboard focus, mobile download behavior, axe accessibility, readable marketing copy, and live motion-preference changes. Production builds and current test results must be checked before publication; this document describes the suite rather than recording a run result.

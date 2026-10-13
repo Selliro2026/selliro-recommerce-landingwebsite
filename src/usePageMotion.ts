@@ -88,10 +88,9 @@ export function usePageMotion() {
         );
         gsap.fromTo(
           ".download-phone",
-          { y: 75, rotate: 13 },
+          { y: 55 },
           {
             y: 0,
-            rotate: 5,
             ease: "none",
             scrollTrigger: {
               trigger: ".download-section",

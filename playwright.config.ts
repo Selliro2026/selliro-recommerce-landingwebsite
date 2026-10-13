@@ -2,7 +2,7 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
-  // Headless WebGL shares the cloud machine's software renderer; avoid GPU contention.
+  // Keep browser validation predictable on the shared cloud machine.
   workers: 1,
   reporter: "list",
   use: {
