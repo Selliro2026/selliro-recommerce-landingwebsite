@@ -1,5 +1,7 @@
 import {
   useEffect,
+  lazy,
+  Suspense,
   useRef,
   useState,
   type CSSProperties,
@@ -7,6 +9,7 @@ import {
 } from "react";
 import { siteConfig } from "./config";
 import { usePageMotion } from "./usePageMotion";
+const ProductScene = lazy(() => import("./components/ProductScene"));
 
 type Product = "headphones" | "phone" | "laptop" | "chair" | "shoes" | "camera";
 type ModalKind = "download" | "contact" | "privacy" | "terms" | "returns";
@@ -104,18 +107,18 @@ function StoreButtons({ open }: { open: () => void }) {
         const content = (
           <>
             <StoreIcon store={store} />
-            <span>
-              <small>
-                {store === "apple" ? "Download on the" : "GET IT ON"}
-              </small>
-              <strong>{store === "apple" ? "App Store" : "Google Play"}</strong>
-            </span>
+            <strong>{store === "apple" ? "App Store" : "Google Play"}</strong>
           </>
         );
         return url ? (
           <a
             key={store}
             className="store-button"
+            aria-label={
+              store === "apple"
+                ? "Download on the App Store"
+                : "GET IT ON Google Play"
+            }
             href={url}
             target="_blank"
             rel="noopener noreferrer"
@@ -123,7 +126,16 @@ function StoreButtons({ open }: { open: () => void }) {
             {content}
           </a>
         ) : (
-          <button key={store} className="store-button" onClick={open}>
+          <button
+            key={store}
+            className="store-button"
+            aria-label={
+              store === "apple"
+                ? "Download on the App Store"
+                : "GET IT ON Google Play"
+            }
+            onClick={open}
+          >
             {content}
           </button>
         );
@@ -463,51 +475,42 @@ export default function App() {
         <p className="mobile-menu-foot">Good things deserve another chapter.</p>
       </dialog>
       <main id="main">
-        <section className="hero container" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <h1 id="hero-title">
-              <span className="hero-line">
-                <span>Great things.</span>
-              </span>{" "}
-              <span className="hero-line">
-                <span>Better prices.</span>
-              </span>
-            </h1>
-            <p>
-              Buy and sell pre-owned tech, furniture, and everyday favourites.
-              Find it all on Selliro.
-            </p>
-            <StoreButtons open={() => showModal("download")} />
-            <a className="hero-explore text-link" href="#discover">
-              Find your next favourite <Arrow direction="down" />
-            </a>
-            <div className="hero-footnote">
-              <span className="status-dot" /> A new home for pre-owned.
-            </div>
-          </div>
-          <div className="hero-art">
-            <div className="hero-image-wrap">
-              <img
-                className="hero-image"
-                src="/images/selliro-editorial.webp"
-                width="1122"
-                height="1402"
-                alt="A leather lounge chair, silver headphones, and a camera in a sunlit room"
-                fetchPriority="high"
-              />
-            </div>
-            <div className="image-note">
-              <span>The next chapter looks good.</span>
-              <a
-                href="#discover"
-                className="image-note-link"
-                aria-label="Explore pre-owned categories"
-              >
-                <Arrow />
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero-inner container">
+            <div className="hero-copy">
+              <h1 id="hero-title">
+                <span className="hero-line">
+                  <span>Great things.</span>
+                </span>{" "}
+                <span className="hero-line">
+                  <span>Better prices.</span>
+                </span>
+              </h1>
+              <p>
+                Buy and sell pre-owned.
+                <br />
+                Find more of what you love.
+              </p>
+              <StoreButtons open={() => showModal("download")} />
+              <a className="hero-explore text-link" href="#discover">
+                Explore the good finds <Arrow direction="down" />
               </a>
             </div>
-            <div className="image-index" aria-hidden="true">
-              01 — THE SELLIRO EDIT
+            <div className="hero-stage">
+              <Suspense
+                fallback={
+                  <div
+                    className="scene-loading"
+                    role="img"
+                    aria-label="Silver headphones and a smartphone"
+                  >
+                    <ProductPhoto product="headphones" />
+                    <ProductPhoto product="phone" />
+                  </div>
+                }
+              >
+                <ProductScene />
+              </Suspense>
             </div>
           </div>
         </section>
@@ -516,19 +519,28 @@ export default function App() {
           id="why-selliro"
         >
           <div className="section-marker reveal">
-            <span>01 / Why Selliro</span>
-            <span>A little more considered.</span>
+            <span>Why Selliro</span>
           </div>
-          <div className="why-heading reveal">
-            <h2>
-              Great taste doesn’t
-              <br />
-              have to cost more.
-            </h2>
-            <p>
-              That phone you’ve had your eye on. The chair that makes the room.
-              Things you’ll love, with plenty of life left in them.
-            </p>
+          <div className="why-heading">
+            <div className="why-story reveal">
+              <h2>
+                Great taste.
+                <br />A smaller price tag.
+              </h2>
+              <p>
+                That phone you’ve had your eye on. The chair that makes the
+                room. Find things you’ll love, with plenty of life left in them.
+              </p>
+            </div>
+            <div className="life-photo">
+              <img
+                src="/images/selliro-editorial.webp"
+                alt="A leather lounge chair and headphones in a sunlit home"
+                width="1122"
+                height="1402"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div className="benefits">
             {[
@@ -544,9 +556,8 @@ export default function App() {
                 "Make a deal together.",
                 "Send an offer, talk to the seller, and agree on a price you’re both happy with.",
               ],
-            ].map(([title, copy], index) => (
+            ].map(([title, copy]) => (
               <article className="reveal" key={title}>
-                <span className="benefit-number">0{index + 1}</span>
                 <div>
                   <h3>{title}</h3>
                   <p>{copy}</p>
@@ -558,8 +569,7 @@ export default function App() {
         <section className="discovery-section" id="discover">
           <div className="container section-space">
             <div className="section-marker reveal">
-              <span>02 / The good finds</span>
-              <span>Pre-owned. Well chosen.</span>
+              <span>Explore the collection</span>
             </div>
             <div className="discovery-heading reveal">
               <h2>
@@ -568,7 +578,6 @@ export default function App() {
                 <span>A lot to love.</span>
               </h2>
               <div className="discovery-controls">
-                <p>What are you looking for?</p>
                 <div className="rail-buttons">
                   <button
                     className="icon-button"
@@ -602,7 +611,6 @@ export default function App() {
               {categories.map((item) => (
                 <a className="category" href="#download" key={item.title}>
                   <div className="category-image">
-                    <span className="category-number">{item.number}</span>
                     <ProductPhoto product={item.product} />
                     <span className="category-action">
                       <Arrow />
@@ -616,7 +624,6 @@ export default function App() {
               ))}
             </div>
             <div className="discovery-footer">
-              <span>Discover the full collection in the app.</span>
               <a href="#download" className="text-link">
                 Explore Selliro <Arrow />
               </a>
@@ -628,8 +635,7 @@ export default function App() {
           id="how-it-works"
         >
           <div className="section-marker reveal">
-            <span>03 / How it works</span>
-            <span>From first look to final offer.</span>
+            <span>How it works</span>
           </div>
           <div className="how-layout">
             <div className="how-intro reveal">
@@ -664,26 +670,14 @@ export default function App() {
               </div>
             </div>
             <div className={`journey-visual journey-${mode} reveal`}>
-              <div className="journey-topline">
-                <span>A look inside Selliro</span>
-                <span>0{step + 1} / 03</span>
-              </div>
               <div className="journey-scene" key={`${mode}-${step}`}>
                 <div className="journey-product">
                   <ProductPhoto
                     product={mode === "buy" ? "headphones" : "camera"}
                   />
                 </div>
-                <div className="journey-label">
-                  <span>
-                    {mode === "buy"
-                      ? "Your next favourite playlist, upgraded."
-                      : "Your old camera. Someone’s new hobby."}
-                  </span>
-                </div>
                 <div className="journey-card">
                   <div className="journey-card-top">
-                    <span className="journey-mark">s.</span>
                     <span>
                       {mode === "buy"
                         ? [
@@ -697,7 +691,6 @@ export default function App() {
                             "Ready for a new home",
                           ][step]}
                     </span>
-                    <span className="mini-dot" />
                   </div>
                   <strong>
                     {mode === "buy"
@@ -712,7 +705,7 @@ export default function App() {
                           "Good things keep going.",
                         ][step]}
                   </strong>
-                  <span className="journey-card-link">
+                  <a href="#download" className="journey-card-link">
                     {mode === "buy"
                       ? [
                           "Discover on Selliro",
@@ -725,11 +718,10 @@ export default function App() {
                           "Arrange your handover",
                         ][step]}
                     <Arrow direction="right" />
-                  </span>
+                  </a>
                 </div>
               </div>
               <div className="journey-bottomline">
-                <span>Explore in the app</span>
                 <span className="step-dots" aria-hidden="true">
                   {[0, 1, 2].map((i) => (
                     <span key={i} className={i === step ? "active" : ""} />
@@ -778,7 +770,7 @@ export default function App() {
         <section className="trust-section" id="trust">
           <div className="container trust-layout section-space">
             <div className="trust-intro reveal">
-              <span className="eyebrow">04 / A little peace of mind</span>
+              <span className="eyebrow">Built around trust</span>
               <h2>
                 A good deal
                 <br />
@@ -811,7 +803,6 @@ export default function App() {
                 ],
               ].map(([number, title, copy]) => (
                 <article className="reveal" key={number}>
-                  <span>{number}</span>
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
@@ -827,11 +818,7 @@ export default function App() {
           </div>
         </section>
         <section className="rewards-section container reveal">
-          <div className="rewards-wordmark" aria-hidden="true">
-            s<span>.</span>
-          </div>
           <div className="rewards-copy">
-            <span className="eyebrow">A little extra, from Selliro.</span>
             <h2>Good finds. With rewards.</h2>
             <p>
               Meet Selliro Coins. Explore ways to earn and use rewards in the
@@ -844,7 +831,7 @@ export default function App() {
         </section>
         <section className="faq-section container section-space" id="faqs">
           <div className="faq-intro reveal">
-            <span className="eyebrow">05 / Good to know</span>
+            <span className="eyebrow">Your questions, answered</span>
             <h2>
               A few things
               <br />
@@ -885,9 +872,6 @@ export default function App() {
         <section className="download-section" id="download">
           <div className="container download-layout">
             <div className="download-copy reveal">
-              <span className="eyebrow">
-                Make room for your next favourite.
-              </span>
               <h2>
                 It’s out there.
                 <br />
@@ -907,9 +891,6 @@ export default function App() {
               <div className="download-phone">
                 <AppPreview />
               </div>
-              <span className="app-preview-label">
-                A new way to find your favourites.
-              </span>
             </div>
           </div>
         </section>

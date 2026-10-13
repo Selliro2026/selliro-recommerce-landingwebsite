@@ -25,17 +25,15 @@ test("all page sections render with local assets and no runtime errors", async (
   ]) {
     await expect(page.locator(`#${section}`)).toBeAttached();
   }
-  const image = await page.request.get("/images/selliro-editorial.webp");
+  const image = await page.request.get("/images/product-editorial.webp");
   expect(image.ok()).toBeTruthy();
   expect(image.headers()["content-type"]).toContain("image/webp");
-  await expect(page.locator(".hero-image")).toBeVisible();
-  expect(
-    await page
-      .locator(".hero-image")
-      .evaluate(
-        (node: HTMLImageElement) => node.complete && node.naturalWidth > 0,
-      ),
-  ).toBeTruthy();
+  await expect(page.locator(".hero-stage")).toBeVisible();
+  await expect(page.locator(".hero-stage [data-renderer]")).toHaveAttribute(
+    "data-renderer",
+    /^(webgl|fallback)$/,
+  );
+  await page.waitForLoadState("networkidle");
   expect(errors).toEqual([]);
   expect(failed).toEqual([]);
 });
@@ -152,21 +150,72 @@ test("reduced-motion presentation passes core accessibility checks", async ({
   expect(results.violations).toEqual([]);
 });
 
-test("marketing copy remains readable on small phones", async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 850 });
-  await page.goto("/");
-  const sizes = await page
-    .locator(
-      ".hero-copy > p, .benefits p, .step p, .trust-intro > p, .faq-item p, .download-copy > p",
-    )
-    .evaluateAll((nodes) =>
-      nodes.map((node) => parseFloat(getComputedStyle(node).fontSize)),
-    );
-  expect(Math.min(...sizes)).toBeGreaterThanOrEqual(16);
-  await expect(
-    page.getByText("LESS UNUSED. MORE POSSIBILITIES.", { exact: true }),
-  ).toHaveCount(0);
-});
+for (const width of [320, 390, 1440]) {
+  test(`marketing copy and actions remain readable at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 850 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    const textSizes = await page
+      .locator(
+        [
+          ".hero-copy > p",
+          ".desktop-nav > a",
+          ".nav-download",
+          ".text-link",
+          ".section-marker > span",
+          ".eyebrow",
+          ".benefits h3",
+          ".benefits p",
+          ".category h3",
+          ".category p",
+          ".discovery-controls p",
+          ".discovery-footer > span",
+          ".mode-switch button",
+          ".step h3 button",
+          ".step p",
+          ".journey-topline > span",
+          ".journey-label",
+          ".journey-card-link",
+          ".journey-bottomline > span",
+          ".trust-intro > p",
+          ".trust-features h3",
+          ".trust-features article p",
+          ".trust-note",
+          ".rewards-copy p",
+          ".faq-intro p",
+          ".faq-item h3 button",
+          ".faq-item p",
+          ".download-copy > p",
+          ".footer-top p",
+          ".footer-bottom nav a",
+          ".footer-bottom nav button",
+        ].join(", "),
+      )
+      .evaluateAll((nodes) =>
+        nodes
+          .filter((node) => {
+            const style = getComputedStyle(node);
+            return (
+              node.getClientRects().length > 0 &&
+              style.visibility !== "hidden" &&
+              !node.closest('[aria-hidden="true"], [inert], .app-device')
+            );
+          })
+          .map((node) => ({
+            text: node.textContent?.trim(),
+            selector: `${node.tagName.toLowerCase()}.${node.className}`,
+            size: parseFloat(getComputedStyle(node).fontSize),
+          })),
+      );
+    expect(textSizes.length).toBeGreaterThan(30);
+    expect(textSizes.filter(({ size }) => size < 16)).toEqual([]);
+    await expect(
+      page.getByText("LESS UNUSED. MORE POSSIBILITIES.", { exact: true }),
+    ).toHaveCount(0);
+  });
+}
 
 test("motion respects preferences, including changes after page load", async ({
   page,
@@ -178,22 +227,100 @@ test("motion respects preferences, including changes after page load", async ({
     .first()
     .evaluate((node) => getComputedStyle(node).animationName);
   expect(headlineMotion).toBe("none");
-  await expect(page.locator(".hero-image")).toHaveCSS("transform", "none");
+  const scene = page.locator(".hero-stage [data-renderer]");
+  await expect(scene).toHaveAttribute("data-motion", "reduced");
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await expect
-    .poll(() =>
-      page
-        .locator(".hero-image")
-        .evaluate((node) => getComputedStyle(node).transform),
-    )
-    .not.toBe("none");
+  await expect(scene).toHaveAttribute("data-motion", "enabled");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(page.locator(".hero-image")).toHaveCSS("transform", "none");
-  await expect(page.locator(".hero-image-wrap")).toHaveCSS("clip-path", "none");
+  await expect(scene).toHaveAttribute("data-motion", "reduced");
   await expect(page.locator(".hero-line > span").first()).toHaveCSS(
     "transform",
     "none",
   );
+});
+
+test("3D products render, rotate with accessible controls, and reset", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const scene = page.locator(".product-scene");
+  const stage = scene.locator(".product-scene__stage");
+  const canvas = scene.locator("canvas");
+  await expect(scene).toHaveAttribute("data-renderer", "webgl");
+  await expect(canvas).toBeVisible();
+  expect(
+    await canvas.evaluate(
+      (node: HTMLCanvasElement) => node.width > 0 && node.height > 0,
+    ),
+  ).toBeTruthy();
+  await expect(stage).toHaveAttribute("data-rotation", "-0.035");
+  const original = await canvas.screenshot();
+
+  await scene.getByRole("button", { name: "Rotate products right" }).click();
+  await expect
+    .poll(async () => Number(await stage.getAttribute("data-rotation")))
+    .toBeGreaterThan(0.15);
+  const rotated = await canvas.screenshot();
+  expect(Buffer.compare(original, rotated)).not.toBe(0);
+
+  await scene.getByRole("button", { name: "Reset view" }).click();
+  await expect(stage).toHaveAttribute("data-rotation", "-0.035");
+  const left = scene.getByRole("button", { name: "Rotate products left" });
+  await left.focus();
+  await page.keyboard.press("Enter");
+  await expect
+    .poll(async () => Number(await stage.getAttribute("data-rotation")))
+    .toBeLessThan(-0.2);
+  await scene.getByRole("button", { name: "Reset view" }).click();
+  await expect(stage).toHaveAttribute("data-rotation", "-0.035");
+  expect(errors).toEqual([]);
+});
+
+test("unsupported WebGL retains product artwork and working download controls", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (
+      contextId: string,
+      ...args: unknown[]
+    ) {
+      if (/^(webgl2?|experimental-webgl)$/.test(contextId)) {
+        document.documentElement.dataset.testWebglBlocked = "true";
+        return null;
+      }
+      return Reflect.apply(original, this, [contextId, ...args]);
+    } as typeof original;
+  });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-test-webgl-blocked",
+    "true",
+  );
+  const scene = page.locator(".product-scene");
+  await expect(scene).toHaveAttribute("data-renderer", "fallback");
+  await expect(scene.locator(".product-scene__fallback")).toBeVisible();
+  await expect(scene.locator(".product-scene__fallback-phone")).toBeVisible();
+  await expect(
+    scene.locator(".product-scene__fallback-headphones"),
+  ).toBeVisible();
+  await expect(scene.locator("canvas")).toHaveCount(0);
+  await expect(
+    scene.getByRole("button", { name: "Rotate products right" }),
+  ).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Download on the App Store" })
+    .first()
+    .click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  expect(errors).toEqual([]);
 });
 
 test("category controls browse the collection on a phone", async ({ page }) => {
@@ -209,8 +336,14 @@ test("category controls browse the collection on a phone", async ({ page }) => {
     .poll(() => rail.evaluate((node) => node.scrollLeft))
     .toBeGreaterThan(200);
   await expect(previous).toBeEnabled();
-  for (let index = 0; index < 4 && (await next.isEnabled()); index++)
+  const remainingCards = (await rail.getByRole("link").count()) - 2;
+  for (let index = 0; index < remainingCards; index++) {
+    const before = await rail.evaluate((node) => node.scrollLeft);
     await next.click();
+    await expect
+      .poll(() => rail.evaluate((node) => node.scrollLeft))
+      .toBeGreaterThan(before);
+  }
   await expect(next).toBeDisabled();
   await rail.getByRole("link", { name: /Lifestyle/ }).click();
   await expect(page).toHaveURL(/#download$/);

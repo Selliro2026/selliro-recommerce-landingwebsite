@@ -8,6 +8,7 @@ import "@fontsource/dm-sans/latin-500.css";
 import "@fontsource/dm-sans/latin-600.css";
 import App from "./App";
 import "./styles.css";
+import "./premium.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
