@@ -3,6 +3,16 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "https://selliro-admin.vercel.app/admin"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "https://selliro-admin.vercel.app/admin/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
