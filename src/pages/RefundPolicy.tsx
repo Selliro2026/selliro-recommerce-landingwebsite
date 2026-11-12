@@ -217,7 +217,7 @@ export default function RefundPolicy() {
           Once a refund request is approved, Selliro will initiate the eligible refund through the
           applicable payment method or payment service provider.
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Expected refund processing time:</strong> 5–10 business days after refund
             approval.
@@ -314,7 +314,7 @@ export default function RefundPolicy() {
       <section>
         <h2>14. How to Request a Cancellation or Refund</h2>
         <p>For cancellation, return or refund assistance, contact:</p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
@@ -342,7 +342,7 @@ export default function RefundPolicy() {
         <p>
           For unresolved cancellation, refund or return complaints, contact:
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Grievance Officer:</strong> Hardeep Ramalingam
           </p>

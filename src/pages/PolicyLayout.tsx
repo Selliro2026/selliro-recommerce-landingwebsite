@@ -38,7 +38,7 @@ export default function PolicyLayout({
 
   return (
     <div className="lp-page">
-      {/* Minimal Top Utility Bar */}
+      {/* Minimal Top Bar */}
       <header className="lp-topbar">
         <div className="lp-topbar-inner">
           <a href="/" className="lp-back-link">
@@ -56,108 +56,79 @@ export default function PolicyLayout({
               </a>
             ))}
           </nav>
-
-          <button
-            type="button"
-            className="lp-print-btn"
-            onClick={() => window.print()}
-          >
-            Print / Save PDF
-          </button>
         </div>
       </header>
 
-      {/* Letter Pad Sheet */}
-      <main className="lp-workspace">
-        <article className="lp-sheet">
-          {/* Corporate Letterhead Header */}
-          <header className="lp-letterhead">
-            <div className="lp-lh-left">
-              <a href="/" className="lp-wordmark" aria-label="Selliro home">
-                selliro<span>.</span>
-              </a>
-              <div className="lp-lh-entity">Hardeep Ramalingam, trading as Selliro</div>
-              <div className="lp-lh-sub">
-                Multi-Vendor Recommerce Marketplace
-                <br />
-                Chennai, Tamil Nadu, India
-              </div>
+      {/* Main Letterhead Page */}
+      <main className="lp-main">
+        {/* Letterhead Header */}
+        <header className="lp-letterhead">
+          <div>
+            <a href="/" className="lp-wordmark" aria-label="Selliro home">
+              selliro<span>.</span>
+            </a>
+            <div className="lp-lh-entity">
+              Hardeep Ramalingam, trading as Selliro
             </div>
-
-            <div className="lp-lh-right">
-              <div>
-                <strong>Website:</strong>{" "}
-                <a href="https://selliro.in" target="_blank" rel="noopener noreferrer">
-                  https://selliro.in
-                </a>
-              </div>
-              <div>
-                <strong>Email:</strong>{" "}
-                <a href="mailto:admin@selliro.in">admin@selliro.in</a>
-              </div>
-              <div>
-                <strong>Operating Market:</strong> Chennai, Tamil Nadu, India
-              </div>
-            </div>
-          </header>
-
-          {/* Document Title & Metadata Table */}
-          <div className="lp-doc-header">
-            <p className="lp-doc-classification">{classification}</p>
-            <h1 className="lp-doc-title">{title}</h1>
-            {subtitle && <p className="lp-doc-subtitle">{subtitle}</p>}
-
-            {(lastUpdated || effectiveDate) && (
-              <div className="lp-meta-grid" role="group" aria-label="Document details">
-                {lastUpdated && (
-                  <div className="lp-meta-cell">
-                    <span className="lp-meta-key">Last Updated</span>
-                    <span className="lp-meta-val">{lastUpdated}</span>
-                  </div>
-                )}
-                {effectiveDate && (
-                  <div className="lp-meta-cell">
-                    <span className="lp-meta-key">Effective Date</span>
-                    <span className="lp-meta-val">{effectiveDate}</span>
-                  </div>
-                )}
-                <div className="lp-meta-cell">
-                  <span className="lp-meta-key">Business Entity</span>
-                  <span className="lp-meta-val">Hardeep Ramalingam (Selliro)</span>
-                </div>
-                <div className="lp-meta-cell">
-                  <span className="lp-meta-key">Official Contact</span>
-                  <span className="lp-meta-val">
-                    <a href="mailto:admin@selliro.in">admin@selliro.in</a>
-                  </span>
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Document Body */}
-          <div className="lp-body">{children}</div>
-
-          {/* Letterhead Sign-off Footer */}
-          <footer className="lp-sheet-footer">
-            <div>
-              <strong>SELLIRO – Buy Smart. Sell Easy. Reuse More.</strong>
-              <div>Issued by Hardeep Ramalingam, trading as Selliro · Chennai, Tamil Nadu, India</div>
-            </div>
+          <div className="lp-lh-right">
             <div>
               <a href="https://selliro.in" target="_blank" rel="noopener noreferrer">
                 selliro.in
-              </a>{" "}
-              · <a href="mailto:admin@selliro.in">admin@selliro.in</a>
+              </a>
             </div>
-          </footer>
-        </article>
+            <div>
+              <a href="mailto:admin@selliro.in">admin@selliro.in</a>
+            </div>
+            <div>Chennai, Tamil Nadu, India</div>
+          </div>
+        </header>
+
+        {/* Document Title & Plain Metadata Lines */}
+        <div className="lp-doc-header">
+          <p className="lp-doc-classification">{classification}</p>
+          <h1 className="lp-doc-title">{title}</h1>
+          {subtitle && <p className="lp-doc-subtitle">{subtitle}</p>}
+
+          {(lastUpdated || effectiveDate) && (
+            <p className="lp-doc-meta">
+              {lastUpdated && (
+                <span className="lp-doc-meta-item">
+                  <strong>Last Updated:</strong> {lastUpdated}
+                </span>
+              )}
+              {lastUpdated && effectiveDate && (
+                <span className="lp-doc-meta-sep" aria-hidden="true">
+                  ·
+                </span>
+              )}
+              {effectiveDate && (
+                <span className="lp-doc-meta-item">
+                  <strong>Effective Date:</strong> {effectiveDate}
+                </span>
+              )}
+            </p>
+          )}
+        </div>
+
+        {/* Document Content */}
+        <div className="lp-body">{children}</div>
+
+        {/* Minimal Letterhead Sign-off */}
+        <div className="lp-signoff">
+          <strong>SELLIRO – Buy Smart. Sell Easy. Reuse More.</strong>
+          <div>
+            Hardeep Ramalingam, trading as Selliro · Chennai, Tamil Nadu, India ·{" "}
+            <a href="mailto:admin@selliro.in">admin@selliro.in</a>
+          </div>
+        </div>
       </main>
 
-      {/* Bottom Navigation Footer */}
+      {/* Footer */}
       <footer className="lp-page-footer">
         <div className="lp-page-footer-inner">
-          <span>© {new Date().getFullYear()} Selliro. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Selliro</span>
           <nav className="lp-page-footer-links" aria-label="Footer document links">
             {DOC_LINKS.map((item) => (
               <a key={item.href} href={item.href}>

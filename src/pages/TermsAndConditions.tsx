@@ -437,7 +437,7 @@ export default function TermsAndConditions() {
       {/* 22 */}
       <section>
         <h2>22. Contact and Grievance Redressal</h2>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Business Owner:</strong> Hardeep Ramalingam
           </p>

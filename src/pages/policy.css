@@ -1,144 +1,111 @@
 /* ───────────────────────────────────────────────────────────
-   Official Corporate Letter Pad Stylesheet
-   Understated, authoritative legal & company document layout
+   Minimal Corporate Letterhead Page Stylesheet
+   Full-page clean white layout, typographic hierarchy, no boxes/tables
 ─────────────────────────────────────────────────────────── */
 
 .lp-page {
   min-height: 100vh;
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: #ffffff;
+  color: #18181b;
   font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Top Utility Bar (Minimal) ── */
+/* ── Minimal Sticky Top Header ── */
 .lp-topbar {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid #ececef;
   position: sticky;
   top: 0;
   z-index: 40;
 }
 
 .lp-topbar-inner {
-  max-width: 1040px;
+  max-width: 980px;
   margin-inline: auto;
   padding: 0 24px;
-  min-height: 56px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 24px;
 }
 
 .lp-back-link {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
-  color: #374151;
+  color: #52525b;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 0;
   text-decoration: none;
+  white-space: nowrap;
   transition: color 0.15s ease;
 }
 
 .lp-back-link:hover {
-  color: #111827;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: #18181b;
 }
 
 .lp-topbar-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
   flex-wrap: wrap;
 }
 
 .lp-topbar-nav a {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
-  color: #6b7280;
-  padding: 10px 0;
-  border-bottom: 2px solid transparent;
+  color: #71717a;
+  padding: 6px 0;
   text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1.5px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .lp-topbar-nav a:hover {
-  color: #111827;
+  color: #18181b;
 }
 
 .lp-topbar-nav a[aria-current="page"] {
-  color: #111827;
+  color: #18181b;
   font-weight: 600;
-  border-bottom-color: #111827;
+  border-bottom-color: #18181b;
 }
 
-.lp-print-btn {
-  font-size: 13px;
-  font-weight: 500;
-  color: #374151;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.lp-print-btn:hover {
-  background: #f9fafb;
-  border-color: #9ca3af;
-  color: #111827;
-}
-
-/* ── Outer Workspace Wrapper ── */
-.lp-workspace {
+/* ── Main Document Column (Directly on Page, No A4 Box) ── */
+.lp-main {
   flex: 1;
   width: 100%;
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 36px 20px 56px;
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 52px 24px 80px;
 }
 
-/* ── Physical Letter Pad Sheet ── */
-.lp-sheet {
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.03);
-  padding: 56px 64px 60px;
-}
-
-/* ── Official Corporate Letterhead ── */
+/* ── Minimal Letterhead Header ── */
 .lp-letterhead {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  padding-bottom: 24px;
-  border-bottom: 2px solid #111827;
-  margin-bottom: 32px;
-}
-
-.lp-lh-left {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: flex-end;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid #18181b;
+  margin-bottom: 36px;
 }
 
 .lp-wordmark {
   font-family: "Manrope", sans-serif;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.055em;
-  color: #111827;
+  color: #18181b;
   text-decoration: none;
   display: inline-block;
 }
@@ -149,114 +116,84 @@
 
 .lp-lh-entity {
   font-size: 13px;
-  font-weight: 600;
-  color: #374151;
-  margin-top: 4px;
-}
-
-.lp-lh-sub {
-  font-size: 12.5px;
-  color: #6b7280;
+  color: #52525b;
+  margin-top: 8px;
   line-height: 1.45;
 }
 
 .lp-lh-right {
   text-align: right;
-  font-size: 12.5px;
-  line-height: 1.65;
-  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #52525b;
 }
 
 .lp-lh-right a {
-  color: #111827;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: #18181b;
+  text-decoration: none;
+  border-bottom: 1px solid #d4d4d8;
 }
 
 .lp-lh-right a:hover {
-  color: #6045f4;
+  border-bottom-color: #18181b;
 }
 
-/* ── Document Title & Formal Metadata Table ── */
+/* ── Document Title & Plain Metadata Lines (No Table) ── */
 .lp-doc-header {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .lp-doc-classification {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6b7280;
-  margin: 0 0 8px;
+  color: #71717a;
+  margin: 0 0 10px;
 }
 
 .lp-doc-title {
   font-family: "Manrope", sans-serif;
-  font-size: clamp(24px, 3vw, 30px);
+  font-size: clamp(28px, 3.6vw, 36px);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-  color: #111827;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #18181b;
   margin: 0;
 }
 
 .lp-doc-subtitle {
-  font-size: 14.5px;
-  color: #4b5563;
-  margin: 8px 0 0;
+  font-size: 15.5px;
+  color: #52525b;
+  margin: 10px 0 0;
 }
 
-.lp-meta-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  border-top: 1px solid #d1d5db;
-  border-bottom: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  margin-top: 20px;
+.lp-doc-meta {
+  margin-top: 16px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #52525b;
 }
 
-.lp-meta-cell {
-  padding: 11px 14px;
-  border-right: 1px solid #e5e7eb;
-}
-
-.lp-meta-cell:last-child {
-  border-right: none;
-}
-
-.lp-meta-key {
-  display: block;
-  font-size: 10.5px;
+.lp-doc-meta strong {
+  color: #18181b;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6b7280;
-  margin-bottom: 3px;
 }
 
-.lp-meta-val {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: #111827;
-}
-
-.lp-meta-val a {
-  color: #111827;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+.lp-doc-meta-sep {
+  margin-inline: 10px;
+  color: #d4d4d8;
 }
 
 /* ── Document Body Prose ── */
 .lp-body {
-  font-size: 15px;
-  line-height: 1.72;
+  font-size: 15.5px;
+  line-height: 1.75;
   color: #27272a;
 }
 
 .lp-body section {
-  margin-bottom: 34px;
+  margin-bottom: 36px;
 }
 
 .lp-body section:last-child {
@@ -265,31 +202,29 @@
 
 .lp-body h2 {
   font-family: "Manrope", sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.35;
-  color: #111827;
+  color: #18181b;
   margin: 0 0 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #e5e7eb;
 }
 
 .lp-body h3 {
   font-family: "Manrope", sans-serif;
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.4;
-  color: #111827;
-  margin: 18px 0 8px;
+  color: #18181b;
+  margin: 20px 0 8px;
 }
 
 .lp-body p {
-  font-size: 15px;
-  line-height: 1.72;
+  font-size: 15.5px;
+  line-height: 1.75;
   color: #27272a;
-  margin: 0 0 11px;
+  margin: 0 0 12px;
 }
 
 .lp-body p:last-child {
@@ -311,8 +246,8 @@
 }
 
 .lp-body li {
-  font-size: 14.75px;
-  line-height: 1.68;
+  font-size: 15px;
+  line-height: 1.7;
   color: #27272a;
   margin-bottom: 5px;
   padding-left: 4px;
@@ -323,80 +258,59 @@
 }
 
 .lp-body a {
-  color: #1e3a8a;
+  color: #18181b;
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration-color: #a1a1aa;
+  text-underline-offset: 3px;
 }
 
 .lp-body a:hover {
   color: #6045f4;
+  text-decoration-color: #6045f4;
 }
 
-/* ── Formal Notice / Contact / Grievance Record Table ── */
-.lp-record-box {
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  padding: 16px 20px;
-  margin: 14px 0;
+/* ── Clean Plain Contact / Grievance Details (No Table, No Box) ── */
+.lp-contact-lines {
+  margin: 12px 0 14px;
+  padding-left: 16px;
+  border-left: 2px solid #e4e4e7;
 }
 
-.lp-record-box p {
-  font-size: 14px;
+.lp-contact-lines p {
+  font-size: 14.5px;
   line-height: 1.65;
-  color: #1f2937;
-  margin: 0 0 4px;
+  color: #27272a;
+  margin: 0 0 3px;
 }
 
-.lp-record-box p:last-child {
+.lp-contact-lines p:last-child {
   margin-bottom: 0;
 }
 
-.lp-note {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1f2937;
-  background-color: #f9fafb;
-  border: 1px solid #d1d5db;
-  padding: 12px 16px;
-  margin: 14px 0;
+/* ── Sign-off Footer ── */
+.lp-signoff {
+  margin-top: 52px;
+  padding-top: 24px;
+  border-top: 1px solid #e4e4e7;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #52525b;
 }
 
-/* ── Letterhead Document Sign-off ── */
-.lp-sheet-footer {
-  margin-top: 44px;
-  padding-top: 20px;
-  border-top: 1px solid #d1d5db;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: #6b7280;
-}
-
-.lp-sheet-footer strong {
-  color: #111827;
+.lp-signoff strong {
+  color: #18181b;
   font-weight: 600;
 }
 
-.lp-sheet-footer a {
-  color: #374151;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* ── Outer Page Footer ── */
+/* ── Page Footer ── */
 .lp-page-footer {
   margin-top: auto;
-  border-top: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  padding: 20px 24px;
+  border-top: 1px solid #ececef;
+  padding: 24px;
 }
 
 .lp-page-footer-inner {
-  max-width: 840px;
+  max-width: 760px;
   margin-inline: auto;
   display: flex;
   justify-content: space-between;
@@ -404,7 +318,7 @@
   flex-wrap: wrap;
   gap: 12px 24px;
   font-size: 13px;
-  color: #6b7280;
+  color: #71717a;
 }
 
 .lp-page-footer-links {
@@ -414,12 +328,12 @@
 }
 
 .lp-page-footer-links a {
-  color: #4b5563;
+  color: #52525b;
   text-decoration: none;
 }
 
 .lp-page-footer-links a:hover {
-  color: #111827;
+  color: #18181b;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -430,60 +344,42 @@
     display: none;
   }
 
-  .lp-workspace {
-    padding: 20px 12px 40px;
-  }
-
-  .lp-sheet {
-    padding: 32px 22px 36px;
+  .lp-main {
+    padding: 32px 20px 56px;
   }
 
   .lp-letterhead {
     flex-direction: column;
-    gap: 14px;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .lp-lh-right {
     text-align: left;
   }
 
-  .lp-meta-cell {
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
+  .lp-doc-meta-sep {
+    display: none;
   }
 
-  .lp-meta-cell:last-child {
-    border-bottom: none;
+  .lp-doc-meta-item {
+    display: block;
   }
 }
 
-/* ── Print Styles (True Letterhead Output) ── */
+/* ── Print ── */
 @media print {
   .lp-topbar,
   .lp-page-footer {
     display: none !important;
   }
 
-  .lp-page {
-    background: #ffffff !important;
-  }
-
-  .lp-workspace {
+  .lp-main {
     max-width: none;
-    padding: 0;
-  }
-
-  .lp-sheet {
-    border: none;
-    box-shadow: none;
     padding: 0;
   }
 
   .lp-body h2 {
     page-break-after: avoid;
-  }
-
-  .lp-record-box {
-    break-inside: avoid;
   }
 }

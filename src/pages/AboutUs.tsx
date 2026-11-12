@@ -103,7 +103,7 @@ export default function AboutUs() {
           Whether you are looking to buy something useful or sell something you no longer need,
           Selliro welcomes you.
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>SELLIRO – Buy Smart. Sell Easy. Reuse More.</strong>
           </p>

@@ -363,7 +363,7 @@ export default function PrivacyPolicy() {
           Users may request deletion of their Selliro accounts through the account deletion
           functionality available in the application or by contacting us at:
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
@@ -516,7 +516,7 @@ export default function PrivacyPolicy() {
           For questions, complaints, privacy requests or concerns relating to this Privacy Policy,
           users may contact:
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Grievance Officer:</strong> Hardeep Ramalingam
           </p>
@@ -558,7 +558,7 @@ export default function PrivacyPolicy() {
         <p>
           For any questions or concerns regarding this Privacy Policy, please contact:
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Selliro</strong>
           </p>

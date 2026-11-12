@@ -14,7 +14,7 @@ export default function ContactUs() {
           listing, payment, refund, delivery or seller account, our support team is available to
           assist you.
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Business Name:</strong> Hardeep Ramalingam, trading as Selliro
           </p>
@@ -58,7 +58,7 @@ export default function ContactUs() {
         <p>
           For complaints or unresolved issues, you may contact our designated Grievance Officer.
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Grievance Officer:</strong> Hardeep Ramalingam
           </p>
@@ -89,9 +89,11 @@ export default function ContactUs() {
           <li>Description of the issue.</li>
           <li>Relevant photographs, videos or transaction details, where applicable.</li>
         </ul>
-        <div className="lp-note">
-          Please do not share your password, OTP, CVV or other confidential payment credentials.
-        </div>
+        <p>
+          <strong>
+            Please do not share your password, OTP, CVV or other confidential payment credentials.
+          </strong>
+        </p>
       </section>
 
       <section>
@@ -100,7 +102,7 @@ export default function ContactUs() {
           We are committed to providing a reliable marketplace experience and addressing customer
           concerns fairly.
         </p>
-        <div className="lp-record-box">
+        <div className="lp-contact-lines">
           <p>
             <strong>Selliro Customer Support</strong>
           </p>
