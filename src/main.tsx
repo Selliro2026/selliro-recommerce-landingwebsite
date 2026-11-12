@@ -12,8 +12,10 @@ import "./premium.css";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import RefundPolicy from "./pages/RefundPolicy";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
-const path = window.location.pathname;
+const path = window.location.pathname.replace(/\/+$/, "") || "/";
 
 let root: React.ReactNode;
 if (path === "/privacy-policy") {
@@ -22,6 +24,10 @@ if (path === "/privacy-policy") {
   root = <TermsAndConditions />;
 } else if (path === "/refund-policy") {
   root = <RefundPolicy />;
+} else if (path === "/about-us") {
+  root = <AboutUs />;
+} else if (path === "/contact-us") {
+  root = <ContactUs />;
 } else {
   root = <App />;
 }

@@ -3,13 +3,14 @@ import PolicyLayout from "./PolicyLayout";
 export default function TermsAndConditions() {
   return (
     <PolicyLayout
-      title="Terms & Conditions"
+      title="Terms and Conditions"
+      classification="Legal & Compliance"
       lastUpdated="6 November 2026"
       effectiveDate="6 November 2026"
     >
       {/* 1 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">1. Introduction</h2>
+      <section>
+        <h2>1. Introduction</h2>
         <p>Welcome to Selliro.</p>
         <p>
           These Terms and Conditions ("Terms") govern your access to and use of the Selliro
@@ -27,14 +28,14 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 2 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">2. About Selliro</h2>
+      <section>
+        <h2>2. About Selliro</h2>
         <p>
           Selliro operates a multi-vendor recommerce marketplace that connects buyers and sellers of
           new and pre-owned products.
         </p>
         <p>The platform enables:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Individual sellers to list products.</li>
           <li>Business sellers to list products.</li>
           <li>Buyers to discover and purchase listed products.</li>
@@ -49,10 +50,10 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 3 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">3. Eligibility</h2>
+      <section>
+        <h2>3. Eligibility</h2>
         <p>To use Selliro:</p>
-        <ul className="policy-list">
+        <ul>
           <li>You must be at least 18 years old.</li>
           <li>You must provide accurate registration information.</li>
           <li>You must have the legal capacity to enter into a binding agreement.</li>
@@ -65,14 +66,14 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 4 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">4. User Accounts</h2>
+      <section>
+        <h2>4. User Accounts</h2>
         <p>
           Users may register through the authentication methods provided by Selliro, including
           mobile number and OTP verification.
         </p>
         <p>You agree to:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Provide accurate information.</li>
           <li>Keep your account information updated.</li>
           <li>Protect your OTPs and account access.</li>
@@ -86,10 +87,10 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 5 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">5. Seller Responsibilities</h2>
+      <section>
+        <h2>5. Seller Responsibilities</h2>
         <p>Sellers using Selliro agree to:</p>
-        <ol className="policy-ol">
+        <ol>
           <li>Provide accurate product descriptions.</li>
           <li>Upload genuine product photographs.</li>
           <li>
@@ -112,15 +113,15 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 6 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">6. Product Listings and Accuracy</h2>
+      <section>
+        <h2>6. Product Listings and Accuracy</h2>
         <p>Product listings are created using information supplied by sellers.</p>
         <p>
           Selliro may review, moderate, reject, restrict or remove listings that violate platform
           policies or applicable laws.
         </p>
         <p>Buyers should carefully review:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Product descriptions.</li>
           <li>Photographs.</li>
           <li>Product condition.</li>
@@ -136,8 +137,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 7 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">7. Pricing and Marketplace Charges</h2>
+      <section>
+        <h2>7. Pricing and Marketplace Charges</h2>
         <p>Sellers provide their product listing prices.</p>
         <p>
           Selliro may apply a marketplace markup or other buyer-facing pricing adjustment. The
@@ -159,8 +160,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 8 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">8. Orders and Payments</h2>
+      <section>
+        <h2>8. Orders and Payments</h2>
         <p>Buyers may place orders through the Selliro application or website.</p>
         <p>
           Orders are subject to product availability, seller acceptance where applicable and
@@ -185,11 +186,11 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 9 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">9. Delivery and Shipping</h2>
+      <section>
+        <h2>9. Delivery and Shipping</h2>
         <p>Selliro coordinates delivery through third-party logistics and delivery partners.</p>
         <p>The seller is generally responsible for:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Preparing the product.</li>
           <li>Packaging it securely.</li>
           <li>Making it available for collection.</li>
@@ -212,8 +213,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 10 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">10. Inspection, Complaints and Returns</h2>
+      <section>
+        <h2>10. Inspection, Complaints and Returns</h2>
         <p>Buyers should inspect their orders promptly upon delivery.</p>
         <p>
           For issues involving damage, incorrect products, missing items, material differences from
@@ -243,8 +244,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 11 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">11. Cancellations and Refunds</h2>
+      <section>
+        <h2>11. Cancellations and Refunds</h2>
         <p>
           Buyers may request cancellation before the seller dispatches the order, subject to the
           applicable cancellation policy.
@@ -262,10 +263,10 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 12 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">12. Seller Payouts</h2>
+      <section>
+        <h2>12. Seller Payouts</h2>
         <p>Seller payouts are subject to:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Successful order fulfilment.</li>
           <li>Applicable marketplace commissions and charges.</li>
           <li>Completion of the relevant complaint or return window.</li>
@@ -282,8 +283,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 13 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">13. Warranty and Product Responsibility</h2>
+      <section>
+        <h2>13. Warranty and Product Responsibility</h2>
         <p>
           Unless specifically stated in a product listing, Selliro does not independently provide a
           product warranty.
@@ -299,10 +300,10 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 14 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">14. Prohibited Activities</h2>
+      <section>
+        <h2>14. Prohibited Activities</h2>
         <p>Users must not:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Upload fake or misleading product listings.</li>
           <li>Sell stolen or counterfeit goods.</li>
           <li>Misrepresent product condition.</li>
@@ -318,14 +319,14 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 15 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">15. Reviews and User Content</h2>
+      <section>
+        <h2>15. Reviews and User Content</h2>
         <p>
           Users may submit ratings, reviews, product photographs and other content through
           supported features.
         </p>
         <p>By submitting content, you confirm that:</p>
-        <ul className="policy-list">
+        <ul>
           <li>You have the right to submit it.</li>
           <li>It is accurate to the best of your knowledge.</li>
           <li>It does not violate another person's rights.</li>
@@ -338,8 +339,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 16 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">16. Intellectual Property</h2>
+      <section>
+        <h2>16. Intellectual Property</h2>
         <p>
           The Selliro name, logo, branding, website design, application interface, software and
           other platform materials are owned by or licensed to Selliro.
@@ -355,8 +356,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 17 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">17. Privacy and Personal Information</h2>
+      <section>
+        <h2>17. Privacy and Personal Information</h2>
         <p>Your use of Selliro is also governed by our Privacy Policy.</p>
         <p>
           We may collect and process information necessary for account management, payments, order
@@ -369,8 +370,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 18 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">18. Limitation of Liability</h2>
+      <section>
+        <h2>18. Limitation of Liability</h2>
         <p>
           Selliro will take reasonable steps to maintain the availability and functioning of its
           platform.
@@ -378,7 +379,7 @@ export default function TermsAndConditions() {
         <p>
           However, to the extent permitted by applicable law, Selliro shall not be responsible for:
         </p>
-        <ul className="policy-list">
+        <ul>
           <li>Temporary technical interruptions.</li>
           <li>Delays caused by third-party delivery partners.</li>
           <li>Inaccurate information supplied by sellers.</li>
@@ -392,8 +393,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 19 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">19. Suspension and Termination</h2>
+      <section>
+        <h2>19. Suspension and Termination</h2>
         <p>
           Selliro may suspend or terminate access where users violate these Terms, engage in
           fraudulent activities, misuse the platform or create security or legal risks.
@@ -409,8 +410,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 20 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">20. Changes to These Terms</h2>
+      <section>
+        <h2>20. Changes to These Terms</h2>
         <p>
           Selliro may revise these Terms to reflect changes in business operations, platform
           functionality or applicable laws.
@@ -423,8 +424,8 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 21 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">21. Governing Law and Jurisdiction</h2>
+      <section>
+        <h2>21. Governing Law and Jurisdiction</h2>
         <p>These Terms shall be governed by the laws of India.</p>
         <p>
           Subject to applicable consumer protection laws and the jurisdiction of competent
@@ -434,12 +435,18 @@ export default function TermsAndConditions() {
       </section>
 
       {/* 22 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">22. Contact and Grievance Redressal</h2>
-        <div className="policy-contact-box">
-          <p><strong>Business Owner:</strong> Hardeep Ramalingam</p>
-          <p><strong>Business Name:</strong> Hardeep Ramalingam, trading as Selliro</p>
-          <p><strong>Grievance Officer:</strong> Hardeep Ramalingam</p>
+      <section>
+        <h2>22. Contact and Grievance Redressal</h2>
+        <div className="lp-record-box">
+          <p>
+            <strong>Business Owner:</strong> Hardeep Ramalingam
+          </p>
+          <p>
+            <strong>Business Name:</strong> Hardeep Ramalingam, trading as Selliro
+          </p>
+          <p>
+            <strong>Grievance Officer:</strong> Hardeep Ramalingam
+          </p>
           <p>
             <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
@@ -450,7 +457,9 @@ export default function TermsAndConditions() {
               https://selliro.in
             </a>
           </p>
-          <p><strong>Operating Market:</strong> Chennai, Tamil Nadu, India</p>
+          <p>
+            <strong>Operating Market:</strong> Chennai, Tamil Nadu, India
+          </p>
         </div>
         <p>
           We aim to acknowledge complaints within 48 hours and resolve them within 30 days, subject
@@ -464,4 +473,3 @@ export default function TermsAndConditions() {
     </PolicyLayout>
   );
 }
-

@@ -3,6 +3,8 @@ export const siteConfig = {
   appStoreUrl: "",
   googlePlayUrl: "",
   contactEmail: "admin@selliro.in",
+  aboutUrl: "/about-us",
+  contactUrl: "/contact-us",
   privacyUrl: "/privacy-policy",
   termsUrl: "/terms",
   returnsUrl: "/refund-policy",

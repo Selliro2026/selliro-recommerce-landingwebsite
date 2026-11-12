@@ -264,12 +264,18 @@ export default function App() {
   }, []);
   const policyLink = (kind: "privacy" | "terms" | "returns", label: string) => {
     const url = siteConfig[`${kind}Url`];
-    return url ? (
-      <a href={url} target="_blank" rel="noopener noreferrer">
+    if (!url) {
+      return <button onClick={() => showModal(kind)}>{label}</button>;
+    }
+    const isExternal = url.startsWith("http");
+    return (
+      <a
+        href={url}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+      >
         {label}
       </a>
-    ) : (
-      <button onClick={() => showModal(kind)}>{label}</button>
     );
   };
   const steps = mode === "buy" ? buyingSteps : sellingSteps;
@@ -726,11 +732,16 @@ export default function App() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Selliro</span>
           <nav aria-label="Footer navigation">
-            <button onClick={() => showModal("contact")}>Contact</button>
+            {siteConfig.aboutUrl && <a href={siteConfig.aboutUrl}>About Us</a>}
+            {siteConfig.contactUrl ? (
+              <a href={siteConfig.contactUrl}>Contact Us</a>
+            ) : (
+              <button onClick={() => showModal("contact")}>Contact</button>
+            )}
             <a href="#faqs">FAQs</a>
             {policyLink("privacy", "Privacy Policy")}
             {policyLink("terms", "Terms & Conditions")}
-            {policyLink("returns", "Return & Refund Policy")}
+            {policyLink("returns", "Cancellation & Refund Policy")}
           </nav>
         </div>
       </footer>

@@ -4,12 +4,13 @@ export default function PrivacyPolicy() {
   return (
     <PolicyLayout
       title="Privacy Policy"
+      classification="Legal & Compliance"
       lastUpdated="3 November 2026"
       effectiveDate="3 November 2026"
     >
       {/* 1 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">1. Introduction</h2>
+      <section>
+        <h2>1. Introduction</h2>
         <p>Welcome to Selliro.</p>
         <p>
           Selliro operates a multi-vendor recommerce marketplace that enables individuals and
@@ -22,7 +23,7 @@ export default function PrivacyPolicy() {
           personal information when you access or use our application, website and related services.
         </p>
         <p>This policy applies to all users, including:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Buyers purchasing products through Selliro.</li>
           <li>Individual sellers listing products.</li>
           <li>Business sellers and registered merchants.</li>
@@ -36,15 +37,15 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 2 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">2. Information We Collect</h2>
+      <section>
+        <h2>2. Information We Collect</h2>
         <p>
           We may collect the following categories of information depending on how you use Selliro.
         </p>
 
-        <h3 className="policy-sub-title">2.1 Personal Information</h3>
+        <h3>2.1 Personal Information</h3>
         <p>When you register or use our services, we may collect:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Full name.</li>
           <li>Mobile number.</li>
           <li>Email address.</li>
@@ -57,9 +58,9 @@ export default function PrivacyPolicy() {
           OTP authentication and provide marketplace services.
         </p>
 
-        <h3 className="policy-sub-title">2.2 Seller Information</h3>
+        <h3>2.2 Seller Information</h3>
         <p>If you register as a seller, we may collect:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Seller or business name.</li>
           <li>Mobile number and email address.</li>
           <li>Business information.</li>
@@ -74,9 +75,9 @@ export default function PrivacyPolicy() {
           settlements, compliance and customer support.
         </p>
 
-        <h3 className="policy-sub-title">2.3 Buyer Information</h3>
+        <h3>2.3 Buyer Information</h3>
         <p>When you purchase products, we may collect:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Name and contact details.</li>
           <li>Shipping and delivery address.</li>
           <li>Order details.</li>
@@ -90,9 +91,9 @@ export default function PrivacyPolicy() {
           customer support.
         </p>
 
-        <h3 className="policy-sub-title">2.4 Product and Listing Information</h3>
+        <h3>2.4 Product and Listing Information</h3>
         <p>When sellers upload products, we collect:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Product images and videos, where supported.</li>
           <li>Product descriptions.</li>
           <li>Product category.</li>
@@ -108,35 +109,35 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 3 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">3. Device Permissions and Information</h2>
+      <section>
+        <h2>3. Device Permissions and Information</h2>
         <p>
           Selliro may request access to certain permissions on your device to provide specific app
           features.
         </p>
 
-        <h3 className="policy-sub-title">3.1 Camera</h3>
+        <h3>3.1 Camera</h3>
         <p>
           We may request camera access to allow sellers to capture product photographs and upload
           listings or allow users to submit supporting images for complaints.
         </p>
 
-        <h3 className="policy-sub-title">3.2 Photos and Gallery</h3>
+        <h3>3.2 Photos and Gallery</h3>
         <p>
           We may request access to photos or media files to allow users to upload product images,
           profile pictures and supporting photographs.
         </p>
 
-        <h3 className="policy-sub-title">3.3 Location</h3>
+        <h3>3.3 Location</h3>
         <p>
           We may request location access to support delivery-related services, location-based
           functionality and address-related features.
         </p>
         <p>Location access will be subject to your device permission settings.</p>
 
-        <h3 className="policy-sub-title">3.4 Notifications</h3>
+        <h3>3.4 Notifications</h3>
         <p>We may send push notifications regarding:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Order confirmations.</li>
           <li>Order status updates.</li>
           <li>Delivery updates.</li>
@@ -147,7 +148,7 @@ export default function PrivacyPolicy() {
         </ul>
         <p>You can manage notification permissions through your device settings.</p>
 
-        <h3 className="policy-sub-title">3.5 Contacts</h3>
+        <h3>3.5 Contacts</h3>
         <p>
           If a feature requires contacts access, we may request permission to access the relevant
           contact information for that feature.
@@ -163,14 +164,14 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 4 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">4. Payment Information</h2>
+      <section>
+        <h2>4. Payment Information</h2>
         <p>
           Selliro uses third-party payment service providers, including Razorpay, to facilitate
           payments and related transactions.
         </p>
         <p>When you make a payment:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Your payment may be processed through the payment provider's secure systems.</li>
           <li>
             We may receive transaction IDs, payment status, payment method details and related
@@ -200,10 +201,10 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 5 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">5. How We Use Your Information</h2>
+      <section>
+        <h2>5. How We Use Your Information</h2>
         <p>We collect and process information for the following purposes:</p>
-        <ol className="policy-ol">
+        <ol>
           <li>Creating and managing buyer and seller accounts.</li>
           <li>Verifying mobile numbers through OTP authentication.</li>
           <li>Enabling product listings and purchases.</li>
@@ -225,8 +226,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 6 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">6. Third-Party Services and Data Sharing</h2>
+      <section>
+        <h2>6. Third-Party Services and Data Sharing</h2>
         <p>
           Selliro works with selected third-party service providers to operate its marketplace.
         </p>
@@ -234,19 +235,19 @@ export default function PrivacyPolicy() {
           We may share relevant information with the following categories of service providers.
         </p>
 
-        <h3 className="policy-sub-title">6.1 Payment Service Providers</h3>
+        <h3>6.1 Payment Service Providers</h3>
         <p>
           We use Razorpay and other authorised payment-related service providers, where applicable,
           to facilitate payment processing, refunds and seller settlements.
         </p>
 
-        <h3 className="policy-sub-title">6.2 Delivery and Logistics Partners</h3>
+        <h3>6.2 Delivery and Logistics Partners</h3>
         <p>
           We may share relevant buyer and order information with third-party delivery partners to
           facilitate product pickup and delivery.
         </p>
         <p>This may include:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Buyer's name.</li>
           <li>Mobile number.</li>
           <li>Delivery address.</li>
@@ -258,13 +259,13 @@ export default function PrivacyPolicy() {
           service.
         </p>
 
-        <h3 className="policy-sub-title">6.3 Sellers</h3>
+        <h3>6.3 Sellers</h3>
         <p>
           To fulfil orders, relevant buyer information, including delivery details and order
           information, may be shared with the seller responsible for the order.
         </p>
 
-        <h3 className="policy-sub-title">6.4 Analytics Services</h3>
+        <h3>6.4 Analytics Services</h3>
         <p>Selliro uses the following analytics and marketing technologies:</p>
         <p>
           <strong>Firebase Analytics and Firebase Crashlytics (Google)</strong>
@@ -278,22 +279,27 @@ export default function PrivacyPolicy() {
           <br />
           We may use Meta SDK technologies to measure advertising performance, understand campaign
           effectiveness, attribute app-related events and improve our marketing activities.
+        </p>
+        <p>
           Depending on the SDK configuration and device settings, these services may process device
           identifiers, app events, technical information and advertising-related information.
         </p>
         <p>
           These providers process information under their respective privacy policies and applicable
-          terms. Users may manage certain tracking and advertising preferences through their device
+          terms.
+        </p>
+        <p>
+          Users may manage certain tracking and advertising preferences through their device
           settings and available platform controls.
         </p>
 
-        <h3 className="policy-sub-title">6.5 Legal and Regulatory Authorities</h3>
+        <h3>6.5 Legal and Regulatory Authorities</h3>
         <p>
           We may disclose information when required by applicable law, court orders, lawful
           government requests or regulatory obligations.
         </p>
 
-        <h3 className="policy-sub-title">6.6 Business Transfers</h3>
+        <h3>6.6 Business Transfers</h3>
         <p>
           If Selliro undergoes a merger, acquisition, restructuring or transfer of business assets,
           relevant information may be transferred as part of that transaction, subject to applicable
@@ -303,14 +309,14 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 7 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">7. Data Storage and Security</h2>
+      <section>
+        <h2>7. Data Storage and Security</h2>
         <p>
           We take reasonable technical and organisational measures to protect personal information
           against unauthorised access, misuse, alteration, disclosure, loss or destruction.
         </p>
         <p>Our security practices may include:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Restricted access to personal information.</li>
           <li>Authentication and access controls.</li>
           <li>Secure payment processing through payment providers.</li>
@@ -328,10 +334,10 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 8 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">8. Data Retention</h2>
+      <section>
+        <h2>8. Data Retention</h2>
         <p>We retain personal information only for as long as reasonably necessary to:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Maintain user accounts.</li>
           <li>Complete orders and transactions.</li>
           <li>Process payments and refunds.</li>
@@ -351,15 +357,15 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 9 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">9. Account Deletion</h2>
+      <section>
+        <h2>9. Account Deletion</h2>
         <p>
           Users may request deletion of their Selliro accounts through the account deletion
           functionality available in the application or by contacting us at:
         </p>
-        <div className="policy-contact-box">
+        <div className="lp-record-box">
           <p>
-            Email:{" "}
+            <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
           </p>
         </div>
@@ -379,10 +385,10 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 10 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">10. User Rights and Choices</h2>
+      <section>
+        <h2>10. User Rights and Choices</h2>
         <p>Subject to applicable laws, users may have the right to:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Request information about personal data processed by Selliro.</li>
           <li>Request correction of inaccurate or incomplete information.</li>
           <li>Request deletion of personal information where legally permissible.</li>
@@ -406,10 +412,10 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 11 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">11. Cookies and Website Technologies</h2>
+      <section>
+        <h2>11. Cookies and Website Technologies</h2>
         <p>Our website may use cookies and similar technologies to:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Maintain website functionality.</li>
           <li>Remember user preferences.</li>
           <li>Improve website performance.</li>
@@ -423,8 +429,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 12 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">12. Third-Party Websites and Services</h2>
+      <section>
+        <h2>12. Third-Party Websites and Services</h2>
         <p>
           Our application and website may contain links to third-party websites, payment services
           or other external platforms.
@@ -437,8 +443,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 13 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">13. Children's Privacy</h2>
+      <section>
+        <h2>13. Children's Privacy</h2>
         <p>Selliro is intended for individuals aged 18 years and above.</p>
         <p>
           We do not knowingly permit individuals under 18 years of age to register or use our
@@ -452,8 +458,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 14 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">14. Marketing and Promotional Communications</h2>
+      <section>
+        <h2>14. Marketing and Promotional Communications</h2>
         <p>
           We may send users service-related notifications, including order updates, payment
           confirmations and important account communications.
@@ -473,8 +479,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 15 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">15. International Data Processing</h2>
+      <section>
+        <h2>15. International Data Processing</h2>
         <p>
           Some of our third-party technology, analytics, payment or infrastructure providers may
           process information through systems located outside India.
@@ -487,8 +493,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 16 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">16. Changes to This Privacy Policy</h2>
+      <section>
+        <h2>16. Changes to This Privacy Policy</h2>
         <p>
           Selliro may update this Privacy Policy from time to time to reflect changes in our
           application, business operations, third-party services or applicable laws.
@@ -504,20 +510,26 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 17 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">17. Grievance Officer and Privacy Contact</h2>
+      <section>
+        <h2>17. Grievance Officer and Privacy Contact</h2>
         <p>
           For questions, complaints, privacy requests or concerns relating to this Privacy Policy,
           users may contact:
         </p>
-        <div className="policy-contact-box">
-          <p><strong>Grievance Officer:</strong> Hardeep Ramalingam</p>
-          <p><strong>Business:</strong> Hardeep Ramalingam, trading as Selliro</p>
+        <div className="lp-record-box">
+          <p>
+            <strong>Grievance Officer:</strong> Hardeep Ramalingam
+          </p>
+          <p>
+            <strong>Business:</strong> Hardeep Ramalingam, trading as Selliro
+          </p>
           <p>
             <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
           </p>
-          <p><strong>Jurisdiction:</strong> Chennai, Tamil Nadu, India</p>
+          <p>
+            <strong>Jurisdiction:</strong> Chennai, Tamil Nadu, India
+          </p>
         </div>
         <p>
           We aim to acknowledge privacy-related complaints within 48 hours and make reasonable
@@ -527,8 +539,8 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 18 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">18. Governing Law</h2>
+      <section>
+        <h2>18. Governing Law</h2>
         <p>
           This Privacy Policy shall be governed by and interpreted in accordance with the laws of
           India.
@@ -541,13 +553,15 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* 19 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">19. Contact Us</h2>
+      <section>
+        <h2>19. Contact Us</h2>
         <p>
           For any questions or concerns regarding this Privacy Policy, please contact:
         </p>
-        <div className="policy-contact-box">
-          <p><strong>Selliro</strong></p>
+        <div className="lp-record-box">
+          <p>
+            <strong>Selliro</strong>
+          </p>
           <p>Hardeep Ramalingam</p>
           <p>
             <strong>Website:</strong>{" "}
@@ -565,4 +579,3 @@ export default function PrivacyPolicy() {
     </PolicyLayout>
   );
 }
-

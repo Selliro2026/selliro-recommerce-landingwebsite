@@ -3,13 +3,14 @@ import PolicyLayout from "./PolicyLayout";
 export default function RefundPolicy() {
   return (
     <PolicyLayout
-      title="Cancellation & Refund Policy"
+      title="Cancellation and Refund Policy"
+      classification="Legal & Compliance"
       lastUpdated="6 November 2026"
       effectiveDate="6 November 2026"
     >
       {/* 1 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">1. Introduction</h2>
+      <section>
+        <h2>1. Introduction</h2>
         <p>
           At Selliro, we aim to provide buyers and sellers with a smooth and reliable marketplace
           experience.
@@ -24,13 +25,13 @@ export default function RefundPolicy() {
       </section>
 
       {/* 2 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">2. Order Cancellation by Buyers</h2>
+      <section>
+        <h2>2. Order Cancellation by Buyers</h2>
 
-        <h3 className="policy-sub-title">2.1 Cancellation Before Dispatch</h3>
+        <h3>2.1 Cancellation Before Dispatch</h3>
         <p>Buyers may request cancellation of an order before the seller dispatches the product.</p>
         <p>To request cancellation, buyers should:</p>
-        <ol className="policy-ol">
+        <ol>
           <li>Open the Selliro application.</li>
           <li>Visit their order history.</li>
           <li>Select the relevant order.</li>
@@ -43,7 +44,7 @@ export default function RefundPolicy() {
           refunded.
         </p>
 
-        <h3 className="policy-sub-title">2.2 Cancellation After Dispatch</h3>
+        <h3>2.2 Cancellation After Dispatch</h3>
         <p>
           Once the seller has dispatched the product or it has been handed over to the delivery
           partner, standard cancellation may no longer be available.
@@ -56,10 +57,10 @@ export default function RefundPolicy() {
       </section>
 
       {/* 3 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">3. Cancellation by Sellers or Selliro</h2>
+      <section>
+        <h2>3. Cancellation by Sellers or Selliro</h2>
         <p>An order may need to be cancelled if:</p>
-        <ul className="policy-list">
+        <ul>
           <li>The seller cannot fulfil the order.</li>
           <li>The product is unavailable.</li>
           <li>The product is found to be incorrectly listed.</li>
@@ -77,10 +78,10 @@ export default function RefundPolicy() {
       </section>
 
       {/* 4 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">4. Eligible Return and Refund Situations</h2>
+      <section>
+        <h2>4. Eligible Return and Refund Situations</h2>
         <p>A buyer may request a return or refund review in situations including:</p>
-        <ol className="policy-ol">
+        <ol>
           <li>
             <strong>Damaged Product:</strong> The product arrives physically damaged.
           </li>
@@ -112,10 +113,10 @@ export default function RefundPolicy() {
       </section>
 
       {/* 5 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">5. Non-Eligible Return Situations</h2>
+      <section>
+        <h2>5. Non-Eligible Return Situations</h2>
         <p>A return request may not ordinarily be accepted solely because:</p>
-        <ul className="policy-list">
+        <ul>
           <li>The buyer changes their mind after receiving the product.</li>
           <li>The buyer no longer wants the product.</li>
           <li>
@@ -136,15 +137,15 @@ export default function RefundPolicy() {
       </section>
 
       {/* 6 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">6. 72-Hour Complaint Window</h2>
+      <section>
+        <h2>6. 72-Hour Complaint Window</h2>
         <p>Buyers must report eligible product issues within 72 hours of delivery.</p>
         <p>
           To raise a complaint, buyers should contact Selliro through the application or email{" "}
           <a href="mailto:admin@selliro.in">admin@selliro.in</a>.
         </p>
         <p>The complaint should include:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Order ID.</li>
           <li>Description of the issue.</li>
           <li>Photographs showing the product and packaging.</li>
@@ -166,10 +167,10 @@ export default function RefundPolicy() {
       </section>
 
       {/* 7 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">7. Return Review Process</h2>
+      <section>
+        <h2>7. Return Review Process</h2>
         <p>After receiving a complaint:</p>
-        <ol className="policy-ol">
+        <ol>
           <li>Selliro will register the complaint.</li>
           <li>Our team will review the submitted information.</li>
           <li>Additional photographs, videos or clarification may be requested.</li>
@@ -178,7 +179,7 @@ export default function RefundPolicy() {
           <li>An appropriate resolution will be communicated to the buyer.</li>
         </ol>
         <p>Depending on the circumstances, the resolution may include:</p>
-        <ul className="policy-list">
+        <ul>
           <li>A refund.</li>
           <li>A replacement, where available and agreed.</li>
           <li>A return and refund.</li>
@@ -191,8 +192,8 @@ export default function RefundPolicy() {
       </section>
 
       {/* 8 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">8. Return Shipping and Collection</h2>
+      <section>
+        <h2>8. Return Shipping and Collection</h2>
         <p>
           Where a return is approved, Selliro will communicate the applicable return procedure.
         </p>
@@ -210,19 +211,22 @@ export default function RefundPolicy() {
       </section>
 
       {/* 9 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">9. Refund Processing</h2>
+      <section>
+        <h2>9. Refund Processing</h2>
         <p>
           Once a refund request is approved, Selliro will initiate the eligible refund through the
           applicable payment method or payment service provider.
         </p>
-        <p>
-          <strong>Expected refund processing time: 5–10 business days after refund approval.</strong>
-        </p>
+        <div className="lp-record-box">
+          <p>
+            <strong>Expected refund processing time:</strong> 5–10 business days after refund
+            approval.
+          </p>
+        </div>
         <p>
           The actual time taken for the refund to appear in the buyer's account may depend on:
         </p>
-        <ul className="policy-list">
+        <ul>
           <li>Payment gateway processing.</li>
           <li>Bank processing timelines.</li>
           <li>Card issuer or UPI provider procedures.</li>
@@ -239,13 +243,13 @@ export default function RefundPolicy() {
       </section>
 
       {/* 10 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">10. Refund Amount</h2>
+      <section>
+        <h2>10. Refund Amount</h2>
         <p>
           The refund amount will be determined based on the order and the approved resolution.
         </p>
         <p>Where applicable, the refund may include:</p>
-        <ul className="policy-list">
+        <ul>
           <li>The product amount paid.</li>
           <li>Applicable delivery charges, where refundable.</li>
           <li>Other charges that must legally be refunded.</li>
@@ -260,8 +264,8 @@ export default function RefundPolicy() {
       </section>
 
       {/* 11 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">11. Seller Payouts and Pending Complaints</h2>
+      <section>
+        <h2>11. Seller Payouts and Pending Complaints</h2>
         <p>
           Seller payouts are subject to successful fulfilment and completion of the applicable
           complaint window.
@@ -278,8 +282,8 @@ export default function RefundPolicy() {
       </section>
 
       {/* 12 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">12. Delivery Failures</h2>
+      <section>
+        <h2>12. Delivery Failures</h2>
         <p>
           If a delivery attempt fails because of an incorrect address, unavailable recipient or
           other buyer-related delivery issue, Selliro or its delivery partner may coordinate another
@@ -296,8 +300,8 @@ export default function RefundPolicy() {
       </section>
 
       {/* 13 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">13. Fraudulent or Misuse-Related Claims</h2>
+      <section>
+        <h2>13. Fraudulent or Misuse-Related Claims</h2>
         <p>Selliro may investigate suspicious or fraudulent refund and return requests.</p>
         <p>Where appropriate, we may request additional information and supporting evidence.</p>
         <p>
@@ -307,10 +311,10 @@ export default function RefundPolicy() {
       </section>
 
       {/* 14 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">14. How to Request a Cancellation or Refund</h2>
+      <section>
+        <h2>14. How to Request a Cancellation or Refund</h2>
         <p>For cancellation, return or refund assistance, contact:</p>
-        <div className="policy-contact-box">
+        <div className="lp-record-box">
           <p>
             <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
@@ -323,7 +327,7 @@ export default function RefundPolicy() {
           </p>
         </div>
         <p>Please include:</p>
-        <ul className="policy-list">
+        <ul>
           <li>Your registered name.</li>
           <li>Order ID.</li>
           <li>Registered mobile number or email.</li>
@@ -333,14 +337,18 @@ export default function RefundPolicy() {
       </section>
 
       {/* 15 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">15. Grievance Redressal</h2>
+      <section>
+        <h2>15. Grievance Redressal</h2>
         <p>
           For unresolved cancellation, refund or return complaints, contact:
         </p>
-        <div className="policy-contact-box">
-          <p><strong>Grievance Officer:</strong> Hardeep Ramalingam</p>
-          <p><strong>Business:</strong> Hardeep Ramalingam, trading as Selliro</p>
+        <div className="lp-record-box">
+          <p>
+            <strong>Grievance Officer:</strong> Hardeep Ramalingam
+          </p>
+          <p>
+            <strong>Business:</strong> Hardeep Ramalingam, trading as Selliro
+          </p>
           <p>
             <strong>Email:</strong>{" "}
             <a href="mailto:admin@selliro.in">admin@selliro.in</a>
@@ -353,8 +361,8 @@ export default function RefundPolicy() {
       </section>
 
       {/* 16 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">16. Policy Updates</h2>
+      <section>
+        <h2>16. Policy Updates</h2>
         <p>
           Selliro may update this policy from time to time to reflect changes in business
           operations, payment systems, delivery arrangements or applicable laws.
@@ -369,8 +377,8 @@ export default function RefundPolicy() {
       </section>
 
       {/* 17 */}
-      <section className="policy-section">
-        <h2 className="policy-section-title">17. Applicable Law</h2>
+      <section>
+        <h2>17. Applicable Law</h2>
         <p>
           This policy shall be interpreted in accordance with the laws of India, including
           applicable consumer protection and e-commerce regulations.
@@ -383,4 +391,3 @@ export default function RefundPolicy() {
     </PolicyLayout>
   );
 }
-
