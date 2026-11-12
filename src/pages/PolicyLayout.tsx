@@ -66,10 +66,10 @@ export default function PolicyLayout({
           <div>
             <a href="/" className="lp-brand-lockup" aria-label="Selliro home">
               <img
-                src="/favicon.svg"
+                src="/images/app-logo.png"
                 alt=""
-                width={34}
-                height={34}
+                width={38}
+                height={38}
                 className="lp-logo-mark"
               />
               <span className="lp-wordmark">
