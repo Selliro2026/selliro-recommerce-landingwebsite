@@ -99,6 +99,20 @@
   margin-bottom: 36px;
 }
 
+.lp-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+}
+
+.lp-logo-mark {
+  width: 34px;
+  height: 34px;
+  display: block;
+  flex-shrink: 0;
+}
+
 .lp-wordmark {
   font-family: "Manrope", sans-serif;
   font-size: 30px;
@@ -106,7 +120,6 @@
   line-height: 1;
   letter-spacing: -0.055em;
   color: #18181b;
-  text-decoration: none;
   display: inline-block;
 }
 

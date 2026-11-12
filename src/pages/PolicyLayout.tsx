@@ -64,8 +64,17 @@ export default function PolicyLayout({
         {/* Letterhead Header */}
         <header className="lp-letterhead">
           <div>
-            <a href="/" className="lp-wordmark" aria-label="Selliro home">
-              selliro<span>.</span>
+            <a href="/" className="lp-brand-lockup" aria-label="Selliro home">
+              <img
+                src="/favicon.svg"
+                alt=""
+                width={34}
+                height={34}
+                className="lp-logo-mark"
+              />
+              <span className="lp-wordmark">
+                selliro<span>.</span>
+              </span>
             </a>
             <div className="lp-lh-entity">
               Hardeep Ramalingam, trading as Selliro
